@@ -4,7 +4,6 @@ namespace App\Service;
 
 class FileService implements StorageServiceInterface
 {
-
     private string $ratePath;
 
     public function __construct(private string $path)
@@ -22,12 +21,12 @@ class FileService implements StorageServiceInterface
         file_put_contents($this->ratePath . $name, $data);
     }
 
-    public function copy(string $oldName, string $newName):bool
+    public function copy(string $oldName, string $newName): bool
     {
         return copy($this->ratePath . $oldName, $this->ratePath . $newName);
     }
 
-    public function delete(string $name):bool
+    public function delete(string $name): bool
     {
         return unlink($this->ratePath . $name);
     }

@@ -51,5 +51,11 @@ $ docker build -t currency_api_project .
 * exec
 ```bash
   $ docker ps
-  $ docker exec -ti 440b710fe5d7 /bin/bash
+  $ docker exec -ti 440b710fe5d7 /bin/bash  
+```
+
+
+## Run code sniffer
+```bash
+  $ ./vendor/bin/phpcs --standard=./tests/phpcs.xml .
 ```

@@ -12,9 +12,8 @@ class CurrencyApiClient
         private HttpClientInterface $httpClient,
         private ApiRate $apiRateMapper,
         private string $apiHost,
-        private string $apiKey)
-    {
-
+        private string $apiKey
+    ) {
     }
 
     public function getRate(string $fromCurrency = 'USD', string $toCurrency = 'BTC'): Rate
@@ -44,5 +43,4 @@ class CurrencyApiClient
         $data = array_merge($response->toArray(), ['currencyTo' => $toCurrency]);
         return $this->apiRateMapper->fromArray($data);
     }
-
 }

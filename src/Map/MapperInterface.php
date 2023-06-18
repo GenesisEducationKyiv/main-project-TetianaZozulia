@@ -7,5 +7,4 @@ interface MapperInterface
     public function toArray($object): array;
 
     public function fromArray(array $ar);
-
 }

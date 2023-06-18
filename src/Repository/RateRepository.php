@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -8,8 +10,11 @@ use App\Service\StorageServiceInterface;
 
 class RateRepository
 {
-    public function __construct(private RateMapper $rateMapper, private StorageServiceInterface $service, private string $fileName)
-    {
+    public function __construct(
+        private RateMapper $rateMapper,
+        private StorageServiceInterface $service,
+        private string $fileName
+    ) {
     }
 
     public function read(): RateModel
@@ -22,5 +27,4 @@ class RateRepository
     {
         $this->service->write($this->fileName, json_encode($this->rateMapper->toArray($rate)));
     }
-
 }

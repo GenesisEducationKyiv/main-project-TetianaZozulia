@@ -8,7 +8,6 @@ use App\Type\CurrencyName;
 
 class Rate implements MapperInterface
 {
-
     public function toArray($object): array
     {
         if (! $object instanceof RateInterface) {
@@ -23,10 +22,9 @@ class Rate implements MapperInterface
         ];
     }
 
-
     public function fromArray(array $ar)
     {
-        return new RateModel (
+        return new RateModel(
             new CurrencyName($ar['fromCurrencyName']),
             new CurrencyName($ar['toCurrencyName']),
             $ar['rate'],

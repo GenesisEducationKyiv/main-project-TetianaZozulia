@@ -10,7 +10,7 @@ interface StorageServiceInterface
 
     public function copy(string $oldName, string $newName): bool;
 
-    public function delete(string $name):bool;
+    public function delete(string $name): bool;
 
     public function isFileExist(string $name): bool;
 }

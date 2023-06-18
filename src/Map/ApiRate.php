@@ -8,7 +8,6 @@ use App\Type\CurrencyName;
 
 class ApiRate implements MapperInterface
 {
-
     public function toArray($object): array
     {
         if (! $object instanceof RateInterface) {

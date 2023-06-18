@@ -15,8 +15,7 @@ class CurrencyController extends AbstractController
         private RateRepository $rateRepository,
         private Rate $rateMapper,
         private CurrencyApiClient $apiClient
-    )
-    {
+    ) {
     }
 
     #[Route('/rate', name: 'rate', methods: 'GET')]
@@ -54,5 +53,4 @@ class CurrencyController extends AbstractController
             'error' => $error,
         ]);
     }
-
 }

@@ -13,8 +13,7 @@ class Mail
         private string $html,
         private ?Email $from,
         private ?string $subject,
-    )
-    {
+    ) {
     }
 
     /**

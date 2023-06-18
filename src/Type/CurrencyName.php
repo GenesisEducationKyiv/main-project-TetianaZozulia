@@ -13,10 +13,10 @@ class CurrencyName
     {
         $strLen = mb_strlen($str);
         if ($strLen < 1) {
-            throw new InvalidArgumentException('String length Exception: ' . $str . '(Length: ' . $strLen .')');
+            throw new InvalidArgumentException('String length Exception: ' . $str . '(Length: ' . $strLen . ')');
         }
         if ($strLen > 5) {
-            throw new InvalidArgumentException('String length Exception: ' . $str . '(Length: ' . $strLen .')');
+            throw new InvalidArgumentException('String length Exception: ' . $str . '(Length: ' . $strLen . ')');
         }
         $this->str = $str;
     }

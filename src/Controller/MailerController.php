@@ -51,7 +51,7 @@ class MailerController extends AbstractController
         $rate = $rateRepository->read();
         $txt = json_encode($rateMapper->toArray($rate));
         unset($rate);
-        foreach (array_keys(Topic::AVAILABLE_TOPICS) as $topicName ) {
+        foreach (array_keys(Topic::AVAILABLE_TOPICS) as $topicName) {
             $this->repository->createFileToProcessing(new Topic($topicName));
             $mail = new CurrencyMail(
                 new Email('test@test.test'),

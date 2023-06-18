@@ -12,7 +12,6 @@ class Rate implements RateInterface
         private float $rate,
         private int $updateAt
     ) {
-
     }
 
     /**
@@ -46,5 +45,4 @@ class Rate implements RateInterface
     {
         return $this->updateAt;
     }
-
 }

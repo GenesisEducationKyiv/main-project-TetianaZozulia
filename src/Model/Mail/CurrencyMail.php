@@ -12,5 +12,4 @@ class CurrencyMail extends Mail
         $subject = 'Current currency for USD vs BTC';
         parent::__construct($to, $txt, $html, $from, $subject);
     }
-
 }

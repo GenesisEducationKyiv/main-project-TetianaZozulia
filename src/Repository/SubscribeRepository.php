@@ -7,7 +7,7 @@ use App\Model\Topic;
 use App\Service\StorageServiceInterface;
 
 // TODO class має відповідати лише за роботу зі стореджем
-// мажна застосувати паттерн стратегія, написати сервіс який буде направляти в який репо дивитись
+// можна застосувати паттерн стратегія, написати сервіс який буде направляти в який репо дивитись
 // SubscriberRepository or SubscriberProcessingRepository
 class SubscribeRepository
 {
@@ -15,8 +15,7 @@ class SubscribeRepository
         private StorageServiceInterface $fileService,
         private string $filePath,
         private string $processingFilePath
-    )
-    {
+    ) {
     }
 
     public function read(Topic $topic, bool $isProcessing = false): array
@@ -54,18 +53,21 @@ class SubscribeRepository
 
         return $this->fileService->copy(
             $this->filePath . $topic->getFileName(),
-            $this->processingFilePath . $topic->getFileName());
+            $this->processingFilePath . $topic->getFileName()
+        );
     }
 
     public function deleteProcessingFile(Topic $topic): bool
     {
         return $this->fileService->delete(
-            $this->processingFilePath . $topic->getFileName());
+            $this->processingFilePath . $topic->getFileName()
+        );
     }
 
     public function existProcessingFile(Topic $topic): bool
     {
         return $this->fileService->isFileExist(
-            $this->processingFilePath . $topic->getFileName());
+            $this->processingFilePath . $topic->getFileName()
+        );
     }
 }

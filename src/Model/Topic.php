@@ -25,10 +25,8 @@ class Topic
         return $this->name;
     }
 
-
     #[Pure] public function getFileName(): string
     {
         return self::AVAILABLE_TOPICS[$this->getName()];
     }
-
 }
