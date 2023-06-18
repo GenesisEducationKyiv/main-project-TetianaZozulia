@@ -53,4 +53,5 @@ class CurrencyController extends AbstractController
             'error' => $error,
         ]);
     }
+
 }
