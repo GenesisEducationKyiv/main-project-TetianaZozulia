@@ -1,5 +1,4 @@
 on:
-  push:
   pull_request:
   
 name: Inspections
@@ -22,4 +21,4 @@ jobs:
         uses: tinovyatkin/action-php-codesniffer@v1
         with:
           phpcs_path: php phpcs.phar
-          standard: /tests/phpcs.xml
+          standard: ./tests/phpcs.xml
