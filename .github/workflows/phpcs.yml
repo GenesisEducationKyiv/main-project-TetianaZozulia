@@ -1,11 +1,12 @@
 on:
   push:
   pull_request:
-
+  
+name: Inspections
 jobs:
   phpcs:
+    runs-on: ubuntu-latest
     steps:
-      - runs-on: ubuntu-latest
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 # important!
@@ -22,4 +23,3 @@ jobs:
         with:
           phpcs_path: php phpcs.phar
           standard: /tests/phpcs.xml
-
