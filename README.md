@@ -57,5 +57,5 @@ $ docker build -t currency_api_project .
 
 ## Run code sniffer
 ```bash
-  $ ./vendor/bin/phpcs --standard=./tests/phpcs.xml .
+  $ composer sniff
 ```
