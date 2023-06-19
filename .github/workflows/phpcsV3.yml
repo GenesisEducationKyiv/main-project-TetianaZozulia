@@ -1,0 +1,18 @@
+on: pull_request
+
+name: Inspections3
+jobs:
+  runPHPCSInspection:
+    name: Run PHPCS inspection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        uses: php-actions/composer@master
+        with:
+          php_version: '8.1'
+
+      - name: run phpcs
+        run: composer sniff
