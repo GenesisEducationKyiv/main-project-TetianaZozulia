@@ -9,7 +9,6 @@
     <arg name="basepath" value="."/>
     <arg name="colors"/>
     <arg value="nsp"/>
-<!--    <arg name="php_version" value="80120"/>-->
 
     <rule ref="PSR12">
         <exclude name="PSR12.Files.OpenTag.NotAlone"/>
