@@ -5,37 +5,41 @@ namespace App\Controller;
 use App\Map\Rate;
 use App\Model\Email;
 use App\Model\Mail\CurrencyMail;
+use App\Model\ResourceModel\SubscriberResource;
 use App\Model\Topic;
 use App\Repository\RateRepository;
 use App\Repository\SubscribeRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
-class MailerController extends AbstractController
+class MailerController extends BaseController
 {
-    public function __construct(private SubscribeRepository $repository)
-    {
+    public function __construct(
+        protected SerializerInterface $serializer,
+        private SubscribeRepository $repository
+    ) {
+        parent::__construct($serializer);
     }
 
     #[Route('/subscribe', name: 'subscribe', methods: 'POST')]
     public function subscribe(Request $request): JsonResponse
     {
-        $error = [];
         try {
-            $content = json_decode($request->getContent(), true);
-            $email = new Email($content['email']);
-            $topic = new Topic($content['topic'] ?? 'currency');
+            /** @var SubscriberResource $resource */
+            $resource = $this->parseBody($request, SubscriberResource::class);
+            $email = new Email($resource->getEmail());
+            $topic = new Topic($resource->getTopic());
+            $this->repository->addContent($topic, $email);
         } catch (\InvalidArgumentException $exception) {
-            $error[] = $exception->getMessage();
+            $error = $exception->getMessage();
         }
-        $this->repository->addContent($topic, $email);
 
         return new JsonResponse([
-            'status' => count($error) > 0 ? 'failed' : 'succeed',
-            'error' => $error
+            'status' => isset($error) ? 'failed' : 'succeed',
+            'error' => isset($error) ? [$error] : [],
         ]);
     }
 
@@ -59,6 +63,7 @@ class MailerController extends AbstractController
                 ''
             );
             $emails = $this->repository->read(new Topic($topicName), true);
+            dd($emails);
             $chunks = array_chunk($emails, 2);
 
             foreach ($chunks as $chunk) {

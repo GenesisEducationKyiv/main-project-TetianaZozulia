@@ -6,6 +6,7 @@ use App\Map\Rate;
 use App\Repository\RateRepository;
 use App\Service\CurrencyApiClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,34 +23,30 @@ class CurrencyController extends AbstractController
     public function rate(): JsonResponse
     {
         try {
-            $data = $this->rateRepository->read();
-            $data = $this->rateMapper->toArray($data);
-        } catch (\Throwable $exception) {
+            $rate = $this->rateRepository->read();
+        } catch (FileNotFoundException $exception) {
             $rate = $this->apiClient->getRate();
             $this->rateRepository->write($rate);
-            $data = $this->rateMapper->toArray($rate);
         }
         return new JsonResponse([
             'status' => 'succeed',
-            'error' => [],
-            'data' => $data
+            'data' => $this->rateMapper->toArray($rate)
         ]);
     }
 
     #[Route('/rate/update', name: 'rate_update', methods: 'PATCH')]
     public function rateUpdate(): JsonResponse
     {
-        $error = [];
         try {
             $rate = $this->apiClient->getRate();
             $this->rateRepository->write($rate);
         } catch (\HttpException $exception) {
-            $error[] = $exception->getMessage();
+            $error = $exception->getMessage();
         }
 
         return new JsonResponse([
-            'status' => count($error) > 0 ? 'failed' : 'succeed',
-            'error' => $error,
+            'status' => isset($error) ? 'failed' : 'succeed',
+            'error' => isset($error) ? [$error] : [],
         ]);
     }
 }

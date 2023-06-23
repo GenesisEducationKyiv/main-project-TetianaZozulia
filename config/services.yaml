@@ -24,7 +24,7 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\FileService:
         arguments:
-            $path: '/../data/'
+            $path: '%kernel.project_dir%/data/'
 
     App\Service\CurrencyApiClient:
         arguments:

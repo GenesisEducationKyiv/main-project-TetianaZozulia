@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Model\Email;
 use App\Model\Topic;
+use App\Serializer\JsonSerializer;
 use App\Service\StorageServiceInterface;
+use phpDocumentor\Reflection\Types\Array_;
+use Symfony\Component\Serializer\SerializerInterface;
 
 // TODO class має відповідати лише за роботу зі стореджем
 // можна застосувати паттерн стратегія, написати сервіс який буде направляти в який репо дивитись
@@ -13,6 +16,7 @@ class SubscribeRepository
 {
     public function __construct(
         private StorageServiceInterface $fileService,
+        private JsonSerializer $serializer,
         private string $filePath,
         private string $processingFilePath
     ) {
@@ -20,20 +24,24 @@ class SubscribeRepository
 
     public function read(Topic $topic, bool $isProcessing = false): array
     {
-        $json = $this->fileService->read(
+        $content = $this->fileService->read(
             ($isProcessing ? $this->processingFilePath : $this->filePath) . $topic->getFileName()
         );
-        return json_decode($json, true);
+        return $this->serializer->deserialize($content);
     }
 
     public function addContent(Topic $topic, Email $email)
     {
-        $emails = $this->read($topic);
+        $subscribersListFile = $this->filePath . $topic->getFileName();
+        $subscribersList = $this->fileService->isFileExist($subscribersListFile)
+            ? $this->fileService->read($subscribersListFile)
+            : '';
+        $emails = json_decode($subscribersList, true) ?? [];
         array_push($emails, $email->getEmail());
         $emails = array_unique($emails);
         $this->fileService->write(
-            $this->filePath  . $topic->getFileName(),
-            json_encode($emails)
+            $subscribersListFile,
+            $this->serializer->serialize($emails)
         );
     }
 
