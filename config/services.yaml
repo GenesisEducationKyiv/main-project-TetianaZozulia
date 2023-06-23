@@ -22,20 +22,33 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Service\FileService:
+    App\Service\Storage\FileService:
         arguments:
             $path: '/../data/'
 
-    App\Service\CurrencyApiClient:
+    App\Service\CurrencyClient\CurrencyClient:
         arguments:
             $apiHost: 'http://api.coinlayer.com'
-            $apiKey: 'a96e8501450d1f824ad765bc478720ab'
+            $apiKey: '50f2719c8e2a0854f650e25d5e379b94'
+
+    App\Service\Subscription\Subscription:
+        arguments:
+            $filePath: 'subscribers/'
 
     App\Repository\RateRepository:
         arguments:
             $fileName: 'rate.json'
 
-    App\Repository\SubscribeRepository:
+    App\Repository\SubscribersRepository:
         arguments:
             $filePath: 'subscribers/'
-            $processingFilePath: 'subscribers/processing/'
+
+    App\Repository\ProcessingSubscribersRepository:
+        arguments:
+            $filePath: 'subscribers/processing/'
+
+    App\Model\Mail\CurrencyMail:
+        arguments:
+            $from: 'tanuha.zoz@gmail.com'
+            $subject: 'Current currency for USD vs BTC'
+            $html: 'Current currency for USD vs BTC'

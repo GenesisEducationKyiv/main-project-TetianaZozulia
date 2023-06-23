@@ -4,12 +4,50 @@ namespace App\Model\Mail;
 
 use App\Model\Email;
 
-class CurrencyMail extends Mail
+class CurrencyMail implements MailInterface
 {
-    public function __construct(Email $to, string $txt, string $html, ?Email $from = null, ?string $subject = null)
+    private Email $to;
+    private string $txt;
+
+    public function __construct(
+        private string $html,
+        private string $from,
+        private string $subject
+    ) {
+    }
+
+    public function setTo(Email $to): void
     {
-        $from = new Email('test@test.test');
-        $subject = 'Current currency for USD vs BTC';
-        parent::__construct($to, $txt, $html, $from, $subject);
+        $this->to = $to;
+    }
+
+    public function setTxt(string $txt): void
+    {
+        $this->txt = $txt;
+    }
+
+    public function getFrom(): ?Email
+    {
+        return new Email($this->from);
+    }
+
+    public function getTo(): Email
+    {
+        return $this->to;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function getTxt(): string
+    {
+        return $this->txt;
+    }
+
+    public function getHtml(): string
+    {
+        return $this->html;
     }
 }

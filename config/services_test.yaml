@@ -1,0 +1,30 @@
+services:
+
+  App\Service\Storage\FileService:
+    arguments:
+      $path: './tests/data/'
+
+#  App\Repository\SubscribersRepository:
+#    arguments:
+#      $filePath: 'subscribers/'
+#
+#  App\Repository\ProcessingSubscribersRepository:
+#    arguments:
+#      $filePath: 'subscribers/processing/'
+#
+#  App\Model\Mail\CurrencyMail:
+#    arguments:
+#      $from: 'test.test@gmail.com'
+#      $subject: 'TEST Current currency for USD vs BTC'
+#      $html: 'TEST Current currency for USD vs BTC'
+
+#  App\Model\ApiSettings\ApiSettings:
+#    arguments:
+#      $apiHost: 'http://api.coinlayer.com'
+#      $apiKey: 'a96e8501450d1f824ad765bc478720ab'
+
+#    App\Tests\Unit\Service\CurrentDateFactory\TestCurrentDateFactory: ~
+#    App\Service\CurrentDateFactory\CurrentDateFactoryInterface: '@App\Tests\Unit\Service\CurrentDateFactory\TestCurrentDateFactory'
+#
+#    App\Tests\Integration\Service\PostCreator\TestPostCreator: ~
+#    App\Service\PostCreator\PostCreatorInterface: '@App\Tests\Integration\Service\PostCreator\TestPostCreator'

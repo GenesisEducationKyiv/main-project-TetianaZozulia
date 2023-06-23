@@ -6,9 +6,9 @@ namespace App\Repository;
 
 use App\Model\Rate as RateModel;
 use App\Map\Rate as RateMapper;
-use App\Service\StorageServiceInterface;
+use App\Service\Storage\StorageServiceInterface;
 
-class RateRepository
+class RateRepository implements RateRepositoryInterface
 {
     public function __construct(
         private RateMapper $rateMapper,

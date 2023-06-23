@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\Storage;
 
 class FileService implements StorageServiceInterface
 {
@@ -28,7 +28,10 @@ class FileService implements StorageServiceInterface
 
     public function delete(string $name): bool
     {
-        return unlink($this->ratePath . $name);
+        if ($this->isFileExist($name)) {
+            return unlink($this->ratePath . $name);
+        }
+        return true;
     }
 
     public function isFileExist(string $name): bool

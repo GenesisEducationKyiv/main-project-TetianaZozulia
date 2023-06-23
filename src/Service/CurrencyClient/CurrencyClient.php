@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\CurrencyClient;
 
 use App\Map\ApiRate;
 use App\Model\Rate;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class CurrencyApiClient
+class CurrencyClient implements CurrencyClientInterface
 {
     public function __construct(
         private HttpClientInterface $httpClient,

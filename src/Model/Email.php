@@ -2,13 +2,13 @@
 
 namespace App\Model;
 
+
 class Email
 {
     public function __construct(private string $email)
     {
-        //we can add validation here
-        if (! $email) {
-            throw new \InvalidArgumentException('Invalid argument for Email');
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            throw new \InvalidArgumentException('Invalid value for Email');
         }
     }
 
