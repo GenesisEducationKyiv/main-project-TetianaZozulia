@@ -21,7 +21,6 @@ class CurrencyController extends AbstractController
     #[Route('/rate', name: 'rate', methods: 'GET')]
     public function rate(): JsonResponse
     {
-        $error = [];
         try {
             $data = $this->rateRepository->read();
             $data = $this->rateMapper->toArray($data);
@@ -31,8 +30,8 @@ class CurrencyController extends AbstractController
             $data = $this->rateMapper->toArray($rate);
         }
         return new JsonResponse([
-            'status' => count($error) > 0 ? 'failed' : 'succeed',
-            'error' => $error,
+            'status' => 'succeed',
+            'error' => [],
             'data' => $data
         ]);
     }
