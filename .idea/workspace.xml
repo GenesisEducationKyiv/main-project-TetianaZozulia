@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="553f04fe-02b1-49fd-bb3c-f2e4fe7a47ce" name="Changes" comment="" />
+    <list default="true" id="553f04fe-02b1-49fd-bb3c-f2e4fe7a47ce" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/subscribers/processing/currency_subscribers.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exception/NotValidEmail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/SubscribeRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Serializer/JsonSerializer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CurrencyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CurrencyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MailerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MailerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Email.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Email.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/RateRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/RateRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Storage/FileService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Storage/FileService.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,10 +36,11 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/Functional/Controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../main-project-TetianaZozulia-copy" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">

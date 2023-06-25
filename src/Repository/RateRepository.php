@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Model\Rate as RateModel;
 use App\Map\Rate as RateMapper;
 use App\Service\Storage\StorageServiceInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 class RateRepository implements RateRepositoryInterface
 {
@@ -19,8 +20,11 @@ class RateRepository implements RateRepositoryInterface
 
     public function read(): RateModel
     {
-        $json =  $this->service->read($this->fileName);
-        return $this->rateMapper->fromArray(json_decode($json, true));
+        if (!$this->service->isFileExist($this->fileName)) {
+            throw new FileNotFoundException(sprintf('File %s not found', $this->fileName));
+        }
+        $rate = $this->service->read($this->fileName);
+        return $this->rateMapper->fromArray(json_decode($rate, true));
     }
 
     public function write(RateModel $rate): void

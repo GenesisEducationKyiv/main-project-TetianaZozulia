@@ -2,16 +2,12 @@
 
 namespace App\Controller;
 
-use App\Map\Rate;
 use App\Model\Email;
 use App\Model\ResourceModel\SubscriberResource;
 use App\Model\SubscriberModel;
 use App\Model\Topic;
 use App\Repository\SubscribersRepository;
-use App\Service\BusinessCase\GetRateBusinessCase;
 use App\Service\BusinessCase\SendEmailsByTopicCase;
-use App\Service\Mailer\Mailer;
-use App\Service\Mailer\MailFactory;
 use App\Service\Subscription\SubscriptionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +29,6 @@ class MailerController extends BaseController
     #[Route('/api/subscribe', name: 'subscribe', methods: 'POST')]
     public function subscribe(Request $request): JsonResponse
     {
-        $error = [];
         try {
             /** @var SubscriberResource $resource */
             $resource = $this->parseBody($request, SubscriberResource::class);
@@ -43,15 +38,15 @@ class MailerController extends BaseController
             );
             $this->subscription->addSubscriber($subscriber);
         } catch (\InvalidArgumentException | BadRequestHttpException $exception) {
-            $error[] = $exception->getMessage();
+            $error = $exception->getMessage();
         }
 
         return new JsonResponse(
             [
-                'status' => count($error) > 0 ? 'failed' : 'succeed',
-                'error' => $error
+                'status' => isset($error) ? 'failed' : 'succeed',
+                'error' => isset($error) ? [$error] : [],
             ],
-            count($error) > 0 ? Response::HTTP_BAD_REQUEST : Response::HTTP_OK
+            isset($error) ? Response::HTTP_BAD_REQUEST : Response::HTTP_OK
         );
     }
 

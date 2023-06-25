@@ -6,6 +6,7 @@ use App\Map\Rate;
 use App\Service\BusinessCase\GetRateBusinessCase;
 use App\Service\BusinessCase\UpdateRateBusinessCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,27 +23,24 @@ class CurrencyController extends AbstractController
     public function rate(): JsonResponse
     {
         $rate = $this->getRateBusinessCase->execute();
-        $data = $this->rateMapper->toArray($rate);
         return new JsonResponse([
             'status' => 'succeed',
-            'error' => [],
-            'data' => $data
+            'data' => $this->rateMapper->toArray($rate)
         ]);
     }
 
     #[Route('/api/rate/update', name: 'rate_update', methods: 'PATCH')]
     public function rateUpdate(): JsonResponse
     {
-        $error = [];
         try {
             $this->updateRateBusinessCase->execute();
         } catch (\HttpException $exception) {
-            $error[] = $exception->getMessage();
+            $error = $exception->getMessage();
         }
 
         return new JsonResponse([
-            'status' => count($error) > 0 ? 'failed' : 'succeed',
-            'error' => $error,
+            'status' => isset($error) ? 'failed' : 'succeed',
+            'error' => isset($error) ? [$error] : [],
         ]);
     }
 }
