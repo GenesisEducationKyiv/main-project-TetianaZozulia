@@ -60,3 +60,9 @@ $ docker build -t currency_api_project .
 ```bash
   $ composer sniff
 ```
+
+
+## Run test
+```bash
+  $ composer test
+```
