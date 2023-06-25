@@ -5,6 +5,7 @@ namespace App\Tests\Unit\Service\Subscription;
 use App\Model\Email;
 use App\Model\SubscriberModel;
 use App\Model\Topic;
+use App\Serializer\JsonSerializer;
 use App\Service\Storage\FileService;
 use App\Service\Subscription\Subscription;
 use PHPUnit\Framework\TestCase;
@@ -20,6 +21,7 @@ class SubscriptionTest extends TestCase
 
         $subscription = new Subscription(
             $testFileService,
+            new JsonSerializer(),
             'subscribers/'
         );
 

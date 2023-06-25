@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use App\Exception\NotValidEmail;
 use App\Model\Email;
 use App\Model\ResourceModel\SubscriberResource;
 use App\Model\SubscriberModel;
 use App\Model\Topic;
-use App\Repository\SubscribersRepository;
 use App\Service\BusinessCase\SendEmailsByTopicCase;
 use App\Service\Subscription\SubscriptionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,8 +20,7 @@ class MailerController extends BaseController
 {
     public function __construct(
         protected SerializerInterface $serializer,
-        private SubscriptionInterface $subscription,
-        private SubscribersRepository $repository
+        private SubscriptionInterface $subscription
     ) {
         parent::__construct($serializer);
     }
@@ -37,7 +36,7 @@ class MailerController extends BaseController
                 new Topic($resource->getTopic())
             );
             $this->subscription->addSubscriber($subscriber);
-        } catch (\InvalidArgumentException | BadRequestHttpException $exception) {
+        } catch (NotValidEmail | \InvalidArgumentException | BadRequestHttpException $exception) {
             $error = $exception->getMessage();
         }
 

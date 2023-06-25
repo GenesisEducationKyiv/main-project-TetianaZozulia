@@ -5,6 +5,7 @@ namespace App\Service\BusinessCase;
 use App\Model\Rate;
 use App\Repository\RateRepositoryInterface;
 use App\Service\CurrencyClient\CurrencyClientInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 class GetRateBusinessCase
 {
@@ -18,7 +19,7 @@ class GetRateBusinessCase
     {
         try {
             $rate = $this->rateRepository->read();
-        } catch (\Throwable $exception) {
+        } catch (FileNotFoundException $exception) {
             $rate = $this->currencyClient->getRate();
             $this->rateRepository->write($rate);
         }

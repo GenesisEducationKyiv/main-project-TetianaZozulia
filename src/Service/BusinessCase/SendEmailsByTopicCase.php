@@ -3,7 +3,9 @@
 namespace App\Service\BusinessCase;
 
 use App\Map\Rate as RateMapper;
+use App\Model\Mail\MailInterface;
 use App\Model\Topic;
+use App\Serializer\JsonSerializer;
 use App\Service\Mailer\BusinessMailerInterface;
 use App\Service\Mailer\MailFactory;
 use App\Service\SubscribersProcessingProvider\SubscribersProcessingProvider;
@@ -16,13 +18,14 @@ class SendEmailsByTopicCase
         private MailFactory $mailFactory,
         private BusinessMailerInterface $mailerService,
         private SubscribersProcessingProvider $processingProvider,
+        private JsonSerializer $serializer
     ) {
     }
 
     public function execute(): void
     {
         $rate = $this->rateBusinessCase->execute();
-        $mailTxt = json_encode($this->rateMapper->toArray($rate));
+        $mailTxt = $this->serializer->serialize($this->rateMapper->toArray($rate));
         unset($rate);
 
         foreach (array_keys(Topic::AVAILABLE_TOPICS) as $topicName) {
@@ -31,18 +34,21 @@ class SendEmailsByTopicCase
 
             $this->processingProvider->createProcessingFile(new Topic($topicName));
             $emails = $this->processingProvider->readProcessingFile(new Topic($topicName));
-            $chunks = array_chunk($emails, 2);
-
-            foreach ($chunks as $chunk) {
-                $this->mailerService->batchSend($mail, $chunk);
-                $emails = $emailsDiff = array_diff($emails, $chunk);
-                $this->processingProvider->writeProcessingFile(
-                    new Topic($topicName),
-                    $emailsDiff
-                );
-            }
-
+            $this->sendByChunk($emails, $mail, new Topic($topicName));
             $this->processingProvider->deleteProcessingFile(new Topic($topicName));
         }
+    }
+
+    private function sendByChunk(array $emails, MailInterface $mail, Topic $topic, int $chunkSize = 2): void
+    {
+        if (count($emails) > $chunkSize) {
+            $this->sendByChunk(array_slice($emails, $chunkSize), $mail, $topic);
+            $emails = array_slice($emails, 0, $chunkSize);
+        }
+
+        $this->mailerService->batchSend($mail, $emails);
+        $processingEmails = $this->processingProvider->readProcessingFile($topic);
+        $emailsDiff = array_diff($processingEmails, $emails);
+        $this->processingProvider->writeProcessingFile($topic, $emailsDiff);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Tests\Unit\Service\Mailer;
 use App\Model\Topic;
 use App\Repository\ProcessingSubscribersRepository;
 use App\Repository\SubscribersRepository;
+use App\Serializer\JsonSerializer;
 use App\Service\Storage\FileService;
 use App\Service\SubscribersProcessingProvider\SubscribersProcessingProvider;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +25,8 @@ class ProcessingProviderTest extends TestCase
         );
         $processingProvider = new SubscribersProcessingProvider(
             $processingSubscriberRepo,
-            $subscriberRepo
+            $subscriberRepo,
+            new JsonSerializer()
         );
         $processingProvider->createProcessingFile(new Topic('currency'));
 
@@ -49,7 +51,8 @@ class ProcessingProviderTest extends TestCase
 
         $processingProvider = new SubscribersProcessingProvider(
             $processingSubscriberRepo,
-            $subscriberRepo
+            $subscriberRepo,
+            new JsonSerializer()
         );
 
         $processingProvider->deleteProcessingFile(new Topic('currency'));

@@ -2,20 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="553f04fe-02b1-49fd-bb3c-f2e4fe7a47ce" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/subscribers/processing/currency_subscribers.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Exception/NotValidEmail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/SubscribeRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Serializer/JsonSerializer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services_test.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services_test.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/rate.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/rate.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/subscribers/currency_subscribers.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/subscribers/currency_subscribers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/subscribers/processing/currency_subscribers.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CurrencyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CurrencyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/MailerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MailerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Email.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Email.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/RateRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/RateRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/Storage/FileService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Storage/FileService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/SubscribeRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/BusinessCase/GetRateBusinessCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/BusinessCase/GetRateBusinessCase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/BusinessCase/SendEmailsByTopicCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/BusinessCase/SendEmailsByTopicCase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/SubscribersProcessingProvider/SubscribersProcessingProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SubscribersProcessingProvider/SubscribersProcessingProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Subscription/Subscription.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Subscription/Subscription.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Service/Mailer/ProcessingProviderTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Service/Mailer/ProcessingProviderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Service/Subscription/SubscriptionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Service/Subscription/SubscriptionTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +55,30 @@
     </key>
   </component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="Merge branch 'hw1-cleancode'">
+      <created>1687682549933</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1687682549933</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'hw1-cleancode'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'hw1-cleancode'" />
   </component>
 </project>

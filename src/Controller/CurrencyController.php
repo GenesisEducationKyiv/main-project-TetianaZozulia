@@ -6,7 +6,6 @@ use App\Map\Rate;
 use App\Service\BusinessCase\GetRateBusinessCase;
 use App\Service\BusinessCase\UpdateRateBusinessCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 

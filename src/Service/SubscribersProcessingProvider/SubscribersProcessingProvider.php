@@ -5,12 +5,14 @@ namespace App\Service\SubscribersProcessingProvider;
 use App\Model\Topic;
 use App\Repository\ProcessingSubscribersRepository;
 use App\Repository\SubscribersRepository;
+use App\Serializer\JsonSerializer;
 
 class SubscribersProcessingProvider
 {
     public function __construct(
         private ProcessingSubscribersRepository $processingSubscribersRepository,
-        private SubscribersRepository $subscribersRepository
+        private SubscribersRepository $subscribersRepository,
+        private JsonSerializer $serializer
     ) {
     }
 
@@ -26,14 +28,14 @@ class SubscribersProcessingProvider
     public function readProcessingFile(Topic $topic): array
     {
         $content = $this->processingSubscribersRepository->read($topic);
-        return json_decode($content, true);
+        return $this->serializer->deserialize($content);
     }
 
     public function writeProcessingFile(Topic $topic, array $data): void
     {
         $this->processingSubscribersRepository->write(
             $topic,
-            json_encode($data)
+            $this->serializer->serialize($data)
         );
     }
 
