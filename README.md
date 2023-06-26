@@ -61,8 +61,18 @@ $ docker build -t currency_api_project .
   $ composer sniff
 ```
 
-
 ## Run test
+* just tests
 ```bash
-  $ composer test
+  $ composer tests
+```
+
+* with coverage
+```bash
+  $ composer tests-coverage
+```
+
+* run infection
+```bash
+  $ infection --threads=1 --noop
 ```
