@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -165,6 +164,8 @@ fabric.properties
 # PHPUnit
 /app/phpunit.xml
 /phpunit.xml
+.phpunit.result.cache
+/.phpunit.cache
 
 # Build data
 /build/
@@ -184,12 +185,12 @@ src/Model/*~
 
 # End of https://www.toptal.com/developers/gitignore/api/phpstorm,symfony
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

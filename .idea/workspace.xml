@@ -1,8 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="553f04fe-02b1-49fd-bb3c-f2e4fe7a47ce" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="553f04fe-02b1-49fd-bb3c-f2e4fe7a47ce" name="Changes" comment="Fix serializers and foreach">
+      <change afterPath="$PROJECT_DIR$/infection.json5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infection/infection.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infection/infection.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Controller/BaseController.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Controller/CurrencyController.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Controller/MailerController.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Controller/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Controller/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Exception/NotValidEmail.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Exception/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Exception/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Kernel.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Map/ApiRate.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Map/MapperInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Map/Rate.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Map/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Map/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/Email.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/Mail/CurrencyMail.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/Mail/MailInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/Mail/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/Mail/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/Rate.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/RateInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/ResourceModel/ResourceInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/ResourceModel/SubscriberResource.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/ResourceModel/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/ResourceModel/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/SubscriberModel.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/Topic.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Model/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Repository/AbstractSubscribersRepository.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Repository/ProcessingSubscribersRepository.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Repository/RateRepository.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Repository/RateRepositoryInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Repository/SubscribersRepository.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Repository/SubscribersRepositoryInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Repository/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Repository/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Serializer/JsonSerializer.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Serializer/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Serializer/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/BusinessCase/GetRateBusinessCase.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/BusinessCase/SendEmailsByTopicCase.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/BusinessCase/UpdateRateBusinessCase.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/BusinessCase/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/BusinessCase/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/CurrencyClient/CurrencyClient.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/CurrencyClient/CurrencyClientInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/CurrencyClient/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/CurrencyClient/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Mailer/BusinessMailerInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Mailer/MailFactory.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Mailer/MailFactoryInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Mailer/Mailer.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Mailer/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Mailer/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Storage/FileService.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Storage/StorageServiceInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Storage/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Storage/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/SubscribersProcessingProvider/SubscribersProcessingProvider.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/SubscribersProcessingProvider/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/SubscribersProcessingProvider/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Subscription/Subscription.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Subscription/SubscriptionInterface.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Subscription/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/Subscription/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Service/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Type/CurrencyName.php.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Type/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/Type/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_css/custom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_css/nv.d3.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_css/octicons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_icons/file-code.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_icons/file-directory.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_js/d3.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_js/file.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_js/nv.d3.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/_js/popper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reports/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/data/subscribers/processing/currency_subscribers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Functional/Controller/SubscribeUserMailerControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Functional/Controller/SubscribeUserMailerControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Integration/BusinessCase/GetCurrencyRateBusinessCaseTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Integration/BusinessCase/GetCurrencyRateBusinessCaseTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/rate.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/phpcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tests/phpcs.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +125,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../main-project-TetianaZozulia-copy" />
+    <property name="last_opened_file_path" value="/tmp/infection/junit.xml" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
