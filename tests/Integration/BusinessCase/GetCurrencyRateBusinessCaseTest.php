@@ -6,7 +6,7 @@ use App\Model\Rate;
 use App\Service\BusinessCase\GetRateBusinessCase;
 use App\Service\Storage\FileService;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
+/** @codeCoverageIgnore  */
 class GetCurrencyRateBusinessCaseTest extends KernelTestCase
 {
     public function testExpectsGetRateModel(): void

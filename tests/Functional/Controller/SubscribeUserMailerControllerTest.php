@@ -15,7 +15,7 @@ class SubscribeUserMailerControllerTest extends AbstractWebTestCase
         self::assertResponseStatusCodeSame($expected);
     }
 
-    public function expectsResultStatusCodeProvider(): iterable
+    public static function expectsResultStatusCodeProvider(): iterable
     {
         yield [
             ['email' => 'test2.test@gmail.com', 'topic' => 'currency'],
