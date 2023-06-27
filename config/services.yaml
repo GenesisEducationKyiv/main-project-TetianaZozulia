@@ -34,11 +34,7 @@ services:
     App\Service\CurrencyClient\CurrencyClient:
         arguments:
             $apiHost: 'http://api.coinlayer.com'
-            $apiKey: '50f2719c8e2a0854f650e25d5e379b94'
-
-    App\Service\Subscription\Subscription:
-        arguments:
-            $filePath: 'subscribers/'
+            $apiKey: '9a69de177024ace27267e2feefd32198'
 
     App\Service\BusinessCase\SendEmailsByTopicCase:
         arguments:

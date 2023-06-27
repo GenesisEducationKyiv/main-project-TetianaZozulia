@@ -8,7 +8,7 @@ class CurrencyMail extends AbstractMail
 {
     public function getFrom(): ?Email
     {
-       return new Email('tanuha.zoz@gmail.com');
+        return new Email('tanuha.zoz@gmail.com');
     }
 
     public function getSubject(): string

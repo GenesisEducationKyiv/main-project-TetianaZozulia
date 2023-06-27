@@ -18,11 +18,6 @@ class FileService implements StorageServiceInterface
         file_put_contents($this->path . $name, $data);
     }
 
-    public function copy(string $oldName, string $newName): bool
-    {
-        return copy($this->path . $oldName, $this->path . $newName);
-    }
-
     public function delete(string $name): bool
     {
         if ($this->isFileExist($name)) {
