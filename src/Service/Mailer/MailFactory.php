@@ -10,7 +10,7 @@ class MailFactory implements MailFactoryInterface
 {
     public function create(Topic $topic): MailInterface
     {
-        $mailClassBaseName = $topic->getName() . 'Mail';
+        $mailClassBaseName = ucfirst(mb_strtolower($topic->getName())) . 'Mail';
         $mailClass = self::MAIL_NAMESPACE . $mailClassBaseName;
         if (! class_exists($mailClass)) {
             throw new ClassNotFoundException($mailClass);
