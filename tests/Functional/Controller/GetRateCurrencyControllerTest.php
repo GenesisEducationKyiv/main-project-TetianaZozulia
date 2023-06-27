@@ -19,5 +19,7 @@ class GetRateCurrencyControllerTest extends AbstractWebTestCase
         $responseData = json_decode($response, true);
         self::assertArrayHasKey('data', $responseData);
         self::assertArrayHasKey('rate', $responseData['data']);
+        self::assertArrayHasKey('status', $responseData);
+        self::assertEquals('succeed', $responseData['status']);
     }
 }

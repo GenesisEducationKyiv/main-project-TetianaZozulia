@@ -15,6 +15,17 @@ class SubscribeUserMailerControllerTest extends AbstractWebTestCase
         self::assertResponseStatusCodeSame($expected);
     }
 
+    public function testExpectsNotEmptyResponse(): void
+    {
+        $response = self::httpPost('/api/subscribe', ['email' => 'test2.test@gmail.com', 'topic' => 'currency']);
+        self::assertJson($response);
+        $responseData = json_decode($response, true);
+        self::assertArrayHasKey('error', $responseData);
+        self::assertEquals([], $responseData['error']);
+        self::assertArrayHasKey('status', $responseData);
+        self::assertEquals('succeed', $responseData['status']);
+    }
+
     public static function expectsResultStatusCodeProvider(): iterable
     {
         yield [
