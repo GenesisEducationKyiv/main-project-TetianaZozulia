@@ -8,6 +8,7 @@ use App\Model\Topic;
 use App\Serializer\JsonSerializer;
 use App\Service\Mailer\BusinessMailerInterface;
 use App\Service\Mailer\MailFactory;
+use App\Service\Mailer\MailFactoryInterface;
 use App\Service\SubscribersProcessingProvider\SubscribersProcessingProvider;
 
 class SendEmailsByTopicCase
@@ -15,7 +16,7 @@ class SendEmailsByTopicCase
     public function __construct(
         private GetRateBusinessCase $rateBusinessCase,
         private RateMapper $rateMapper,
-        private MailFactory $mailFactory,
+        private MailFactoryInterface $mailFactory,
         private BusinessMailerInterface $mailerService,
         private SubscribersProcessingProvider $processingProvider,
         private JsonSerializer $serializer

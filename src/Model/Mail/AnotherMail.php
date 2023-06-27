@@ -4,20 +4,20 @@ namespace App\Model\Mail;
 
 use App\Model\Email;
 
-class CurrencyMail extends AbstractMail
+class AnotherMail extends AbstractMail
 {
     public function getFrom(): ?Email
     {
-       return new Email('tanuha.zoz@gmail.com');
+        return new Email('another.mail@gmail.com');
     }
 
     public function getSubject(): string
     {
-        return 'Current currency for USD vs BTC';
+        return 'Another subject';
     }
 
     public function getHtml(): string
     {
-        return 'Current currency for USD vs BTC';
+        return 'Another Html';
     }
 }

@@ -22,6 +22,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # alias to allow this type to be autowired
+    mail.factory: '@App\Service\Mailer\MailFactory'
+
+    #services
     App\Service\Storage\FileService:
         arguments:
             $path: '%kernel.project_dir%/data/'
@@ -35,6 +40,11 @@ services:
         arguments:
             $filePath: 'subscribers/'
 
+    App\Service\BusinessCase\SendEmailsByTopicCase:
+        arguments:
+            $mailFactory: '@mail.factory'
+
+    #repositories
     App\Repository\RateRepository:
         arguments:
             $fileName: 'rate.json'
@@ -47,8 +57,9 @@ services:
         arguments:
             $filePath: 'subscribers/processing/'
 
-    App\Model\Mail\CurrencyMail:
-        arguments:
-            $from: 'tanuha.zoz@gmail.com'
-            $subject: 'Current currency for USD vs BTC'
-            $html: 'Current currency for USD vs BTC'
+    #models
+#    App\Model\Mail\CurrencyMail:
+#        arguments:
+#            $from: 'tanuha.zoz@gmail.com'
+#            $subject: 'Current currency for USD vs BTC'
+#            $html: 'Current currency for USD vs BTC'
