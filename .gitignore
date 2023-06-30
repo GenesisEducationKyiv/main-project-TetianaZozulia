@@ -166,6 +166,7 @@ fabric.properties
 /phpunit.xml
 .phpunit.result.cache
 /.phpunit.cache
+/reports/
 
 # Build data
 /build/

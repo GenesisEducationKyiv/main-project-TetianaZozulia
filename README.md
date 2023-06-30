@@ -75,4 +75,5 @@ $ docker build -t currency_api_project .
 * run infection
 ```bash
   $ infection --threads=1 --noop
+  $ infection --threads=5 --filter=src/Controller/MailerController --show-mutations
 ```

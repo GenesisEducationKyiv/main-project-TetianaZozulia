@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    subscriber.storage.path: '/subscribers'
 
 services:
     # default configuration for services in *this* file
@@ -29,12 +30,12 @@ services:
     #services
     App\Service\Storage\FileService:
         arguments:
-            $path: '%kernel.project_dir%/data/'
+            $path: '%kernel.project_dir%/data'
 
     App\Service\CurrencyClient\CurrencyClient:
         arguments:
             $apiHost: 'http://api.coinlayer.com'
-            $apiKey: '9a69de177024ace27267e2feefd32198'
+            $apiKey: '50f2719c8e2a0854f650e25d5e379b94'
 
     App\Service\BusinessCase\SendEmailsByTopicCase:
         arguments:
@@ -43,15 +44,11 @@ services:
     #repositories
     App\Repository\RateRepository:
         arguments:
-            $fileName: 'rate.json'
+            $fileName: '/rate.json'
 
     App\Repository\SubscribersRepository:
         arguments:
-            $filePath: 'subscribers/'
-
-    App\Repository\ProcessingSubscribersRepository:
-        arguments:
-            $filePath: 'subscribers/processing/'
+            $filePath: '%subscriber.storage.path%'
 
     #models
 #    App\Model\Mail\CurrencyMail:

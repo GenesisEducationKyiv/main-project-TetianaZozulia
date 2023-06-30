@@ -4,13 +4,11 @@ namespace App\Service\Subscription;
 
 use App\Model\SubscriberModel;
 use App\Repository\SubscribersRepository;
-use App\Serializer\JsonSerializer;
 
 class Subscription implements SubscriptionInterface
 {
     public function __construct(
-        private SubscribersRepository $subscribersRepository,
-        private JsonSerializer $serializer,
+        private SubscribersRepository $subscribersRepository
     ) {
     }
 
@@ -18,13 +16,11 @@ class Subscription implements SubscriptionInterface
     {
         $subscribersList = $this->subscribersRepository->existFile($subscriber->getTopic())
             ? $this->subscribersRepository->read($subscriber->getTopic())
-            : '';
-        $emails = $this->serializer->deserialize($subscribersList) ?? [];
-        array_push($emails, $subscriber->getEmail()->getEmail());
-        $emails = array_unique($emails);
+            : [];
+        array_push($subscribersList, $subscriber->getEmail()->getEmail());
         $this->subscribersRepository->write(
             $subscriber->getTopic(),
-            $this->serializer->serialize($emails)
+            array_unique($subscribersList)
         );
     }
 }

@@ -21,13 +21,13 @@ class SubscriptionTest extends TestCase
         );
         $testSubscriberRepo = new SubscribersRepository(
             $testFileService,
+            new JsonSerializer(),
             'subscribers/'
         );
-        $testSubscriberRepo->deleteAll($topic);
+        $testSubscriberRepo->delete($topic);
 
         $subscription = new Subscription(
-            $testSubscriberRepo,
-            new JsonSerializer()
+            $testSubscriberRepo
         );
 
         $subscription->addSubscriber(new SubscriberModel(
@@ -35,8 +35,7 @@ class SubscriptionTest extends TestCase
             $topic
         ));
 
-        $jsonResult = $testSubscriberRepo->read($topic);
-        $actualSubscribers = json_decode($jsonResult, true);
+        $actualSubscribers = $testSubscriberRepo->read($topic);
         self::assertArrayHasKey('test.test@gmail.com', array_flip($actualSubscribers));
     }
 }

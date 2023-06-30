@@ -11,4 +11,15 @@ class UpdateRateCurrencyControllerTest extends AbstractWebTestCase
         self::httpPatch('/api/rate/update', []);
         self::assertResponseStatusCodeSame(200);
     }
+
+    public function testExpectsNotEmptyResponse(): void
+    {
+        $response = self::httpPatch('/api/rate/update', []);
+        self::assertJson($response);
+        $responseData = json_decode($response, true);
+        self::assertArrayHasKey('error', $responseData);
+        self::assertEquals([], $responseData['error']);
+        self::assertArrayHasKey('status', $responseData);
+        self::assertEquals('succeed', $responseData['status']);
+    }
 }

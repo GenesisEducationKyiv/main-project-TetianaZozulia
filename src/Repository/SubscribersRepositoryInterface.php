@@ -6,11 +6,13 @@ use App\Model\Topic;
 
 interface SubscribersRepositoryInterface
 {
-    public function read(Topic $topic): string;
+    public function read(Topic $topic): array;
 
-    public function write(Topic $topic, string $data): void;
+    public function write(Topic $topic, array $data): void;
 
-    public function deleteAll(Topic $topic): bool;
+    public function delete(Topic $topic): bool;
 
     public function existFile(Topic $topic): bool;
+
+    public function copyTo(Topic $fromTopic, Topic $toTopic): void;
 }
