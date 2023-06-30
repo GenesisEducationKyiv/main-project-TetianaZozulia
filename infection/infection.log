@@ -1,0 +1,532 @@
+Escaped mutants:
+================
+
+1) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/BaseController.php:20    [M] ProtectedVisibility
+
+--- Original
++++ New
+
+
+2) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/BaseController.php:23    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+3) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/BaseController.php:24    [M] TrueValue
+
+--- Original
++++ New
+
+
+4) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/BaseController.php:27    [M] Concat
+
+--- Original
++++ New
+
+
+5) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/BaseController.php:27    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+6) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/BaseController.php:27    [M] Throw_
+
+--- Original
++++ New
+
+
+7) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:21    [M] PublicVisibility
+
+--- Original
++++ New
+
+
+8) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:25    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+9) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:27    [M] ArrayItem
+
+--- Original
++++ New
+
+
+10) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:31    [M] PublicVisibility
+
+--- Original
++++ New
+
+
+11) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:35    [M] MethodCallRemoval
+
+--- Original
++++ New
+
+
+12) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:40    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+13) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:41    [M] Ternary
+
+--- Original
++++ New
+
+
+14) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:42    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+15) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/CurrencyController.php:42    [M] Ternary
+
+--- Original
++++ New
+
+
+16) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:25    [M] MethodCallRemoval
+
+--- Original
++++ New
+
+
+17) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:28    [M] PublicVisibility
+
+--- Original
++++ New
+
+
+18) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:38    [M] MethodCallRemoval
+
+--- Original
++++ New
+
+
+19) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:39    [M] Catch_
+
+--- Original
++++ New
+
+
+20) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:44    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+21) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:45    [M] Ternary
+
+--- Original
++++ New
+
+
+22) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:46    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+23) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:46    [M] Ternary
+
+--- Original
++++ New
+
+
+24) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:48    [M] Ternary
+
+--- Original
++++ New
+
+
+25) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:52    [M] PublicVisibility
+
+--- Original
++++ New
+
+
+26) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:56    [M] MethodCallRemoval
+
+--- Original
++++ New
+
+
+27) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Controller/MailerController.php:58    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+28) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Exception/NotValidEmail.php:11    [M] MethodCallRemoval
+
+--- Original
++++ New
+
+
+29) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:27    [M] NewObject
+
+--- Original
++++ New
+
+
+30) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/Rate.php:13    [M] InstanceOf_
+
+--- Original
++++ New
+
+
+31) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/Rate.php:13    [M] LogicalNot
+
+--- Original
++++ New
+
+
+32) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Model/Email.php:12    [M] Throw_
+
+--- Original
++++ New
+
+
+33) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Model/ResourceModel/SubscriberResource.php:16    [M] PublicVisibility
+
+--- Original
++++ New
+
+
+34) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Model/ResourceModel/SubscriberResource.php:24    [M] PublicVisibility
+
+--- Original
++++ New
+
+
+35) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Model/SubscriberModel.php:16    [M] PublicVisibility
+
+--- Original
++++ New
+
+
+36) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Model/SubscriberModel.php:24    [M] PublicVisibility
+
+--- Original
++++ New
+
+
+37) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Model/Topic.php:16    [M] Throw_
+
+--- Original
++++ New
+
+
+38) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Storage/FileService.php:31    [M] TrueValue
+
+--- Original
++++ New
+
+
+39) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/SubscribersProcessingProvider/SubscribersProcessingProvider.php:25    [M] MethodCallRemoval
+
+--- Original
++++ New
+
+
+40) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:20    [M] Concat
+
+--- Original
++++ New
+
+
+41) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:20    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+42) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:21    [M] Ternary
+
+--- Original
++++ New
+
+
+43) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:24    [M] Coalesce
+
+--- Original
++++ New
+
+
+44) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:25    [M] FunctionCallRemoval
+
+--- Original
++++ New
+
+
+45) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:26    [M] UnwrapArrayUnique
+
+--- Original
++++ New
+
+
+46) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:27    [M] MethodCallRemoval
+
+--- Original
++++ New
+
+
+47) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:28    [M] Concat
+
+--- Original
++++ New
+
+
+48) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Subscription/Subscription.php:28    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+Timed Out mutants:
+==================
+
+Skipped mutants:
+================
+
+Not Covered mutants:
+====================
+
+1) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:13    [M] InstanceOf_
+
+--- Original
++++ New
+
+
+2) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:13    [M] LogicalNot
+
+--- Original
++++ New
+
+
+3) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:14    [M] Throw_
+
+--- Original
++++ New
+
+
+4) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:17    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+5) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:18    [M] ArrayItem
+
+--- Original
++++ New
+
+
+6) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:19    [M] ArrayItem
+
+--- Original
++++ New
+
+
+7) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:20    [M] ArrayItem
+
+--- Original
++++ New
+
+
+8) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:20    [M] ArrayItemRemoval
+
+--- Original
++++ New
+
+
+9) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/ApiRate.php:21    [M] ArrayItem
+
+--- Original
++++ New
+
+
+10) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Map/Rate.php:14    [M] Throw_
+
+--- Original
++++ New
+
+
+11) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/BusinessCase/SendEmailsByTopicCase.php:45    [M] UnwrapArraySlice
+
+--- Original
++++ New
+
+
+12) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/BusinessCase/SendEmailsByTopicCase.php:45    [M] MethodCallRemoval
+
+--- Original
++++ New
+
+
+13) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/BusinessCase/SendEmailsByTopicCase.php:46    [M] DecrementInteger
+
+--- Original
++++ New
+
+
+14) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/BusinessCase/SendEmailsByTopicCase.php:46    [M] IncrementInteger
+
+--- Original
++++ New
+
+
+15) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/BusinessCase/SendEmailsByTopicCase.php:46    [M] UnwrapArraySlice
+
+--- Original
++++ New
+
+
+16) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/CurrencyClient/CurrencyClient.php:40    [M] Throw_
+
+--- Original
++++ New
+
+
+17) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Mailer/MailFactory.php:20    [M] Throw_
+
+--- Original
++++ New
+
+
+18) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Storage/FileService.php:23    [M] Concat
+
+--- Original
++++ New
+
+
+19) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Storage/FileService.php:23    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+20) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Storage/FileService.php:23    [M] Concat
+
+--- Original
++++ New
+
+
+21) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Service/Storage/FileService.php:23    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+22) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] Concat
+
+--- Original
++++ New
+
+
+23) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+24) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] Concat
+
+--- Original
++++ New
+
+
+25) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+26) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] Concat
+
+--- Original
++++ New
+
+
+27) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+28) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] Concat
+
+--- Original
++++ New
+
+
+29) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+30) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:16    [M] Throw_
+
+--- Original
++++ New
+
+
+31) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] Concat
+
+--- Original
++++ New
+
+
+32) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+33) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] Concat
+
+--- Original
++++ New
+
+
+34) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+35) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] Concat
+
+--- Original
++++ New
+
+
+36) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+37) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] Concat
+
+--- Original
++++ New
+
+
+38) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] ConcatOperandRemoval
+
+--- Original
++++ New
+
+
+39) /home/zozulya/tz/PhpstormProjects/main-project-TetianaZozulia/src/Type/CurrencyName.php:19    [M] Throw_
+
+--- Original
++++ New

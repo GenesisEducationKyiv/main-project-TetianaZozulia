@@ -1,0 +1,5 @@
+services:
+
+  App\Service\Storage\FileService:
+    arguments:
+      $path: './tests/data/'
