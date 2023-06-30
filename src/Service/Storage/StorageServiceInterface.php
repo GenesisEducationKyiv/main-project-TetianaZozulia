@@ -8,8 +8,6 @@ interface StorageServiceInterface
 
     public function write(string $name, string $data): void;
 
-    public function copy(string $oldName, string $newName): bool;
-
     public function delete(string $name): bool;
 
     public function isFileExist(string $name): bool;

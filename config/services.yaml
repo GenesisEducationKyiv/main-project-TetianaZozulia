@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    subscriber.storage.path: '/subscribers'
 
 services:
     # default configuration for services in *this* file
@@ -24,7 +25,7 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\Storage\FileService:
         arguments:
-            $path: '%kernel.project_dir%/data/'
+            $path: '%kernel.project_dir%/data'
 
     App\Service\CurrencyClient\CurrencyClient:
         arguments:
@@ -33,19 +34,15 @@ services:
 
     App\Service\Subscription\Subscription:
         arguments:
-            $filePath: 'subscribers/'
+            $filePath: '%subscriber.storage.path%'
 
     App\Repository\RateRepository:
         arguments:
-            $fileName: 'rate.json'
+            $fileName: '/rate.json'
 
     App\Repository\SubscribersRepository:
         arguments:
-            $filePath: 'subscribers/'
-
-    App\Repository\ProcessingSubscribersRepository:
-        arguments:
-            $filePath: 'subscribers/processing/'
+            $filePath: '%subscriber.storage.path%'
 
     App\Model\Mail\CurrencyMail:
         arguments:

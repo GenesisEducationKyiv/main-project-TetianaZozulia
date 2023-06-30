@@ -5,10 +5,10 @@ namespace App\Service\BusinessCase;
 use App\Map\Rate as RateMapper;
 use App\Model\Mail\MailInterface;
 use App\Model\Topic;
+use App\Repository\SubscribersRepository;
 use App\Serializer\JsonSerializer;
 use App\Service\Mailer\BusinessMailerInterface;
 use App\Service\Mailer\MailFactory;
-use App\Service\SubscribersProcessingProvider\SubscribersProcessingProvider;
 
 class SendEmailsByTopicCase
 {
@@ -17,7 +17,7 @@ class SendEmailsByTopicCase
         private RateMapper $rateMapper,
         private MailFactory $mailFactory,
         private BusinessMailerInterface $mailerService,
-        private SubscribersProcessingProvider $processingProvider,
+        private SubscribersRepository $subscribersRepository,
         private JsonSerializer $serializer
     ) {
     }
@@ -29,26 +29,29 @@ class SendEmailsByTopicCase
         unset($rate);
 
         foreach (array_keys(Topic::AVAILABLE_TOPICS) as $topicName) {
-            $mail = $this->mailFactory->create(new Topic($topicName));
+            $topic = new Topic($topicName);
+            $processingTopic = $topic->createForProcessing();
+
+            $mail = $this->mailFactory->create($topic);
             $mail->setTxt($mailTxt);
 
-            $this->processingProvider->createProcessingFile(new Topic($topicName));
-            $emails = $this->processingProvider->readProcessingFile(new Topic($topicName));
-            $this->sendByChunk($emails, $mail, new Topic($topicName));
-            $this->processingProvider->deleteProcessingFile(new Topic($topicName));
+            $this->subscribersRepository->copyTo($topic, $processingTopic);
+            $emails = $this->subscribersRepository->read($processingTopic);
+            $this->sendByChunk($emails, $mail, $processingTopic);
+            $this->subscribersRepository->delete($processingTopic);
         }
     }
 
-    private function sendByChunk(array $emails, MailInterface $mail, Topic $topic, int $chunkSize = 2): void
+    private function sendByChunk(array $emails, MailInterface $mail, Topic $processingTopic, int $chunkSize = 2): void
     {
         if (count($emails) > $chunkSize) {
-            $this->sendByChunk(array_slice($emails, $chunkSize), $mail, $topic);
+            $this->sendByChunk(array_slice($emails, $chunkSize), $mail, $processingTopic);
             $emails = array_slice($emails, 0, $chunkSize);
         }
 
         $this->mailerService->batchSend($mail, $emails);
-        $processingEmails = $this->processingProvider->readProcessingFile($topic);
+        $processingEmails = $this->subscribersRepository->read($processingTopic);
         $emailsDiff = array_diff($processingEmails, $emails);
-        $this->processingProvider->writeProcessingFile($topic, $emailsDiff);
+        $this->subscribersRepository->write($processingTopic, $emailsDiff);
     }
 }

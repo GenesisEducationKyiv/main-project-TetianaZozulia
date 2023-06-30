@@ -6,15 +6,30 @@ use JetBrains\PhpStorm\Pure;
 
 class Topic
 {
-    const AVAILABLE_TOPICS = [
-        'currency' => 'currency_subscribers.json',
+    public const AVAILABLE_TOPICS = [
+        'currency' => '/currency_subscribers.json',
     ];
 
-    public function __construct(private string $name)
-    {
-        if (!array_key_exists($name, self::AVAILABLE_TOPICS)) {
+    private const PROCESSING_TOPICS = [
+        'currency-processing' => '/processing/currency_subscribers.json',
+    ];
+
+    public function __construct(
+        private string $name,
+    ) {
+        if (!array_key_exists($name, self::AVAILABLE_TOPICS)
+            && !array_key_exists($name, self::PROCESSING_TOPICS)
+        ) {
             throw new \InvalidArgumentException('Undefined topic');
         }
+    }
+
+    /**
+     * @return Topic
+     */
+    public function createForProcessing(): Topic
+    {
+        return new self($this->name . '-processing');
     }
 
     /**
@@ -27,6 +42,6 @@ class Topic
 
     #[Pure] public function getFileName(): string
     {
-        return self::AVAILABLE_TOPICS[$this->getName()];
+        return self::AVAILABLE_TOPICS[$this->getName()] ?? self::PROCESSING_TOPICS[$this->getName()];
     }
 }
