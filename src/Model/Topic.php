@@ -15,9 +15,10 @@ class Topic
     ];
 
     public function __construct(
-        private string $name,
+        private string $name
     ) {
-        if (!array_key_exists($name, self::AVAILABLE_TOPICS)
+        if (
+            !array_key_exists($name, self::AVAILABLE_TOPICS)
             && !array_key_exists($name, self::PROCESSING_TOPICS)
         ) {
             throw new \InvalidArgumentException('Undefined topic');
