@@ -12,11 +12,6 @@
     <arg name="colors"/>
     <arg value="nsp"/>
 
-    <rule ref="PSR12">
-        <exclude name="PSR12.Files.OpenTag.NotAlone"/>
-        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
-    </rule>
-
     <!-- Make this sniff more sensitive to commented out code blocks. -->
     <rule ref="Squiz.PHP.CommentedOutCode">
         <properties>

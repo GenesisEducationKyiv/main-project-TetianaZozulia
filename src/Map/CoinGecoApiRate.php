@@ -8,7 +8,7 @@ use App\Model\Rate;
 use App\Model\RateInterface;
 use App\Type\CurrencyName;
 
-class ApiRate implements MapperInterface
+class CoinGecoApiRate implements MapperInterface
 {
     public function toArray($object): array
     {
@@ -16,21 +16,16 @@ class ApiRate implements MapperInterface
             throw new \InvalidArgumentException('Argument have to be instance of RateInterface');
         }
 
-        return [
-            'target' => $object->getFromCurrencyName()->toString(),
-            'currencyTo' => $object->getToCurrencyName()->toString(),
-            'rates' => [$object->getToCurrencyName()->toString() => $object->getRate()],
-            'timestamp' => $object->getUpdateAt(),
-        ];
+        return [];
     }
 
     public function fromArray(array $ar): RateInterface
     {
         return new Rate(
-            new CurrencyName($ar['target']),
+            new CurrencyName($ar['currencyFrom']),
             new CurrencyName($ar['currencyTo']),
-            $ar['rates'][$ar['currencyTo']],
-            $ar['timestamp']
+            $ar[$ar['currencyFrom']][$ar['currencyTo']],
+            time()
         );
     }
 }

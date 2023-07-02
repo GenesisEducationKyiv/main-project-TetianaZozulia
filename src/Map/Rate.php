@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Map;
 
@@ -22,7 +24,7 @@ class Rate implements MapperInterface
         ];
     }
 
-    public function fromArray(array $ar)
+    public function fromArray(array $ar): RateInterface
     {
         return new RateModel(
             new CurrencyName($ar['fromCurrencyName']),
