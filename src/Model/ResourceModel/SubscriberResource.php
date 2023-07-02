@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Model\ResourceModel;
 
@@ -10,17 +12,11 @@ class SubscriberResource implements ResourceInterface
     ) {
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string
-     */
     public function getTopic(): string
     {
         return $this->topic;

@@ -14,17 +14,11 @@ class CurrencyResource implements ResourceInterface, CurrencyResourceInterface
     ) {
     }
 
-    /**
-     * @return CurrencyName
-     */
     public function getFrom(): CurrencyName
     {
         return $this->from;
     }
 
-    /**
-     * @return CurrencyName
-     */
     public function getTo(): CurrencyName
     {
         return $this->to;

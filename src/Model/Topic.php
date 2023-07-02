@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Model;
 
@@ -25,17 +27,11 @@ class Topic
         }
     }
 
-    /**
-     * @return Topic
-     */
     public function createForProcessing(): Topic
     {
         return new self($this->name . '-processing');
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;

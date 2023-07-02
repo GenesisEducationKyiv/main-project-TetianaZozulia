@@ -13,9 +13,6 @@ class Email
         }
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
