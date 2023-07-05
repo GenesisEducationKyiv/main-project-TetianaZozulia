@@ -39,16 +39,9 @@ class CurrencyController extends BaseController
     #[Route('/api/rate/update', name: 'rate_update', methods: 'PATCH')]
     public function rateUpdate(Request $request): JsonResponse
     {
-        try {
-            $resource = $this->parseQuery($request, $this->currencyResourceMapper);
-            $this->updateRateBusinessCase->execute($resource);
-        } catch (\HttpException $exception) {
-            $error = $exception->getMessage();
-        }
+        $resource = $this->parseQuery($request, $this->currencyResourceMapper);
+        $this->updateRateBusinessCase->execute($resource);
 
-        return new JsonResponse([
-            'status' => isset($error) ? 'failed' : 'succeed',
-            'error' => isset($error) ? [$error] : [],
-        ]);
+        return new JsonResponse();
     }
 }
