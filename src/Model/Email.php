@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Model;
 
@@ -13,8 +15,13 @@ class Email
         }
     }
 
-    public function getEmail(): string
+    public function toString(): string
     {
         return $this->email;
+    }
+
+    public function __toString(): string
+    {
+        return $this->toString();
     }
 }

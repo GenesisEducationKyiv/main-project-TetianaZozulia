@@ -42,8 +42,10 @@ services:
     currency.client.coingeco: '@App\Service\Currency\Repository\CoinGecoCurrencyClient'
     App\Service\Currency\Repository\CurrencyClientInterface: '@App\Service\Currency\Repository\ApiLayerCurrencyClient'
 
-
     #services
+    App\EventListener\ExceptionListener:
+        tags: [ kernel.event_listener ]
+
     App\Service\Storage\FileService:
         arguments:
             $path: '%kernel.project_dir%/data'
@@ -63,6 +65,10 @@ services:
             $currencyClient: '@currency.handler.coinlayer'
             $defaultCurrencyFrom: '%currency.default.from%'
             $defaultCurrencyTo: '%currency.default.to%'
+
+    App\Service\Lock\LockService:
+        arguments:
+            $lockStoragePath: '/lock/'
 
     #currency service
     App\Service\Currency\Repository\CoinlayerCurrencyClient:

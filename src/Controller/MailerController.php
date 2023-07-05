@@ -4,17 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Exception\NotValidEmail;
-use App\Model\Email;
 use App\Model\ResourceModel\SubscriberResource;
-use App\Model\SubscriberModel;
-use App\Model\Topic;
+use App\Service\BusinessCase\AddSubscribersCase;
 use App\Service\BusinessCase\SendEmailsByTopicCase;
-use App\Service\Subscription\SubscriptionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -22,7 +16,7 @@ class MailerController extends BaseController
 {
     public function __construct(
         protected SerializerInterface $serializer,
-        private SubscriptionInterface $subscription
+        private AddSubscribersCase $addSubscribersCase
     ) {
         parent::__construct($serializer);
     }
@@ -30,25 +24,11 @@ class MailerController extends BaseController
     #[Route('/api/subscribe', name: 'subscribe', methods: 'POST')]
     public function subscribe(Request $request): JsonResponse
     {
-        try {
-            /** @var SubscriberResource $resource */
-            $resource = $this->parseBody($request, SubscriberResource::class);
-            $subscriber = new SubscriberModel(
-                new Email($resource->getEmail()),
-                new Topic($resource->getTopic())
-            );
-            $this->subscription->addSubscriber($subscriber);
-        } catch (NotValidEmail | \InvalidArgumentException | BadRequestHttpException $exception) {
-            $error = $exception->getMessage();
-        }
+        /** @var SubscriberResource $resource */
+        $resource = $this->parseBody($request, SubscriberResource::class);
+        $this->addSubscribersCase->execute($resource);
 
-        return new JsonResponse(
-            [
-                'status' => isset($error) ? 'failed' : 'succeed',
-                'error' => isset($error) ? [$error] : [],
-            ],
-            isset($error) ? Response::HTTP_BAD_REQUEST : Response::HTTP_OK
-        );
+        return new JsonResponse();
     }
 
     #[Route('/api/sendEmails', name: 'sendEmails', methods: 'POST')]
@@ -57,9 +37,6 @@ class MailerController extends BaseController
     ): JsonResponse {
         $sendEmailsByTopicCase->execute();
 
-        return new JsonResponse([
-            'status' => 'succeed',
-            'error' => []
-        ]);
+        return new JsonResponse();
     }
 }
