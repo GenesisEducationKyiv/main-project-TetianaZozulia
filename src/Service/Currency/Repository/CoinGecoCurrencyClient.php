@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Service\Currency\Repository;
 
-use App\Event\ApiReturnResponse;
+use App\Enum\ApiName;
 use App\Exception\CurrencyApiFailedException;
 use App\Map\CoinGecoApiRate;
 use App\Model\RateInterface;
 use App\Model\ResourceModel\CurrencyResourceInterface;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -17,7 +16,6 @@ class CoinGecoCurrencyClient implements CurrencyClientInterface
 {
     public function __construct(
         private HttpClientInterface $httpClient,
-        private EventDispatcherInterface $eventDispatcher,
         private CoinGecoApiRate $apiRateMapper,
         private string $apiHost
     ) {
@@ -46,23 +44,22 @@ class CoinGecoCurrencyClient implements CurrencyClientInterface
 
             $statusCode = $response->getStatusCode();
             if ($statusCode > Response::HTTP_OK) {
-                throw new CurrencyApiFailedException(__CLASS__, $statusCode);
+                throw new CurrencyApiFailedException(
+                    'Exception in ' . ApiName::CoinGeco->value . '. ',
+                    $statusCode
+                );
             }
             $rate = array_merge($response->toArray(), [
                 'currencyTo' => strtolower($currencyResource->getTo()->toString()),
                 'currencyFrom' => strtolower($currencyResource->getFrom()->toString()),
             ]);
-            $rate = $this->apiRateMapper->fromArray($rate);
 
-            $event = new ApiReturnResponse($rate, __CLASS__);
-            $this->eventDispatcher->dispatch(
-                $event,
-                $event::NAME
-
-            );
-            return $rate;
+            return $this->apiRateMapper->fromArray($rate);
         } catch (\Exception $exception) {
-            throw new CurrencyApiFailedException(__CLASS__, Response::HTTP_BAD_REQUEST);
+            throw new CurrencyApiFailedException(
+                'Exception in ' . ApiName::CoinGeco->value . '. ' . $exception->getMessage(),
+                Response::HTTP_BAD_REQUEST
+            );
         }
     }
 }

@@ -11,6 +11,10 @@ abstract class AbstractMail implements MailInterface
     private Email $to;
     private string $txt;
 
+    abstract public function getFrom(): ?Email;
+    abstract public function getSubject(): string;
+    abstract public function getHtml(): string;
+
     public function setTo(Email $to): void
     {
         $this->to = $to;
@@ -21,20 +25,13 @@ abstract class AbstractMail implements MailInterface
         $this->txt = $txt;
     }
 
-    abstract public function getFrom(): ?Email;
-
-
     public function getTo(): Email
     {
         return $this->to;
     }
 
-    abstract public function getSubject(): string;
-
     public function getTxt(): string
     {
         return $this->txt;
     }
-
-    abstract public function getHtml(): string;
 }

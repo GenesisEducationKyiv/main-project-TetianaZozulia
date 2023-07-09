@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use App\Exception\NotValidEmail;
+use App\Exception\NotValidEmailException;
 
 class Email
 {
     public function __construct(private string $email)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            throw new NotValidEmail();
+            throw new NotValidEmailException();
         }
     }
 
