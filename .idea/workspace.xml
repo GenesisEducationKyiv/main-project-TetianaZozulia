@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="553f04fe-02b1-49fd-bb3c-f2e4fe7a47ce" name="Changes" comment="Fix serializers and foreach">
-      <change afterPath="$PROJECT_DIR$/src/Model/Mail/AbstractMail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Mail/AnotherMail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/data/subscribers/processing/currency_subscribers.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/rate_btc_usd.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Mail/CurrencyMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Mail/CurrencyMail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/BusinessCase/SendEmailsByTopicCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/BusinessCase/SendEmailsByTopicCase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/Mailer/MailFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Mailer/MailFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/Mailer/MailFactoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Mailer/MailFactoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/rate.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +29,17 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../se-testing" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/EventSubscriber" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/EventSubscriber" />
+      <recent name="$PROJECT_DIR$/src/Event" />
+      <recent name="$PROJECT_DIR$/src/Enum" />
+      <recent name="$PROJECT_DIR$/src/Exception" />
       <recent name="$PROJECT_DIR$/src/Model/Mail" />
-      <recent name="$PROJECT_DIR$/tests/Functional/Controller" />
-      <recent name="$PROJECT_DIR$/tests/Integration/BusinessCase" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Service/Mailer" />
@@ -86,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687794781191</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix after review">
+      <created>1688934941796</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688934941796</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -107,6 +110,22 @@
     <MESSAGE value="run mutation testing" />
     <MESSAGE value="fix tests" />
     <MESSAGE value="update docker according to infection" />
-    <option name="LAST_COMMIT_MESSAGE" value="update docker according to infection" />
+    <MESSAGE value="fix after review" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix after review" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Model/Topic.php</url>
+          <line>11</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
