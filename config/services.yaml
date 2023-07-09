@@ -23,6 +23,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # alias to allow this type to be autowired
+    mail.factory: '@App\Service\Mailer\MailFactory'
+
+    #services
     App\Service\Storage\FileService:
         arguments:
             $path: '%kernel.project_dir%/data'
@@ -32,10 +37,11 @@ services:
             $apiHost: 'http://api.coinlayer.com'
             $apiKey: '50f2719c8e2a0854f650e25d5e379b94'
 
-    App\Service\Subscription\Subscription:
+    App\Service\BusinessCase\SendEmailsByTopicCase:
         arguments:
-            $filePath: '%subscriber.storage.path%'
+            $mailFactory: '@mail.factory'
 
+    #repositories
     App\Repository\RateRepository:
         arguments:
             $fileName: '/rate.json'
@@ -44,8 +50,9 @@ services:
         arguments:
             $filePath: '%subscriber.storage.path%'
 
-    App\Model\Mail\CurrencyMail:
-        arguments:
-            $from: 'tanuha.zoz@gmail.com'
-            $subject: 'Current currency for USD vs BTC'
-            $html: 'Current currency for USD vs BTC'
+    #models
+#    App\Model\Mail\CurrencyMail:
+#        arguments:
+#            $from: 'tanuha.zoz@gmail.com'
+#            $subject: 'Current currency for USD vs BTC'
+#            $html: 'Current currency for USD vs BTC'

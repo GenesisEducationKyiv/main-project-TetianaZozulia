@@ -8,14 +8,14 @@ use App\Model\Topic;
 use App\Repository\SubscribersRepository;
 use App\Serializer\JsonSerializer;
 use App\Service\Mailer\BusinessMailerInterface;
-use App\Service\Mailer\MailFactory;
+use App\Service\Mailer\MailFactoryInterface;
 
 class SendEmailsByTopicCase
 {
     public function __construct(
         private GetRateBusinessCase $rateBusinessCase,
         private RateMapper $rateMapper,
-        private MailFactory $mailFactory,
+        private MailFactoryInterface $mailFactory,
         private BusinessMailerInterface $mailerService,
         private SubscribersRepository $subscribersRepository,
         private JsonSerializer $serializer

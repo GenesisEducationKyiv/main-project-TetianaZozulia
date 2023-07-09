@@ -2,23 +2,19 @@
 
 namespace App\Service\Mailer;
 
-use App\Model\Mail\CurrencyMail;
 use App\Model\Mail\MailInterface;
 use App\Model\Topic;
+use Symfony\Component\VarExporter\Exception\ClassNotFoundException;
 
 class MailFactory implements MailFactoryInterface
 {
-    public function __construct(
-        private CurrencyMail $currencyMail
-    ) {
-    }
-
     public function create(Topic $topic): MailInterface
     {
-        $varName = $topic->getName() . 'Mail';
-        if (!isset($varName)) {
-            throw new \InvalidArgumentException('Undefined topic');
+        $mailClassBaseName = ucfirst(mb_strtolower($topic->getName())) . 'Mail';
+        $mailClass = self::MAIL_NAMESPACE . $mailClassBaseName;
+        if (! class_exists($mailClass)) {
+            throw new ClassNotFoundException($mailClass);
         }
-        return $this->$varName;
+        return new $mailClass();
     }
 }

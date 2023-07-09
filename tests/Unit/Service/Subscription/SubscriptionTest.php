@@ -5,6 +5,7 @@ namespace App\Tests\Unit\Service\Subscription;
 use App\Model\Email;
 use App\Model\SubscriberModel;
 use App\Model\Topic;
+use App\Repository\SubscribersRepository;
 use App\Serializer\JsonSerializer;
 use App\Service\Storage\FileService;
 use App\Service\Subscription\Subscription;
@@ -14,24 +15,27 @@ class SubscriptionTest extends TestCase
 {
     public function testExpectsAddSubscriberToStorage(): void
     {
+        $topic = new Topic('currency');
         $testFileService = new FileService(
             './tests/data/'
         );
-        $testFileService->delete('currency_subscribers.json');
-
-        $subscription = new Subscription(
+        $testSubscriberRepo = new SubscribersRepository(
             $testFileService,
             new JsonSerializer(),
             'subscribers/'
         );
+        $testSubscriberRepo->delete($topic);
+
+        $subscription = new Subscription(
+            $testSubscriberRepo
+        );
 
         $subscription->addSubscriber(new SubscriberModel(
             new Email('test.test@gmail.com'),
-            new Topic('currency')
+            $topic
         ));
 
-        $jsonResult = $testFileService->read('subscribers/currency_subscribers.json');
-        $actualSubscribers = json_decode($jsonResult, true);
+        $actualSubscribers = $testSubscriberRepo->read($topic);
         self::assertArrayHasKey('test.test@gmail.com', array_flip($actualSubscribers));
     }
 }
