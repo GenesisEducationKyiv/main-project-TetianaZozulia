@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Tests\Integration\BusinessCase;
 
@@ -15,7 +17,7 @@ class UpdateCurrencyRateBusinessCaseTest extends KernelTestCase
 
         self::assertEquals(
             date("Y-m-d H:i.", time()),
-            date ("Y-m-d H:i.", filemtime('./tests/data/rate.json'))
+            date ("Y-m-d H:i.", filemtime('./tests/data/rate_btc_usd.json'))
         );
     }
 }

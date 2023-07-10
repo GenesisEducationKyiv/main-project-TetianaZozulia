@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Model;
 
@@ -14,33 +16,21 @@ class Rate implements RateInterface
     ) {
     }
 
-    /**
-     * @return CurrencyName
-     */
     public function getFromCurrencyName(): CurrencyName
     {
         return $this->fromCurrencyName;
     }
 
-    /**
-     * @return CurrencyName
-     */
     public function getToCurrencyName(): CurrencyName
     {
         return $this->toCurrencyName;
     }
 
-    /**
-     * @return float
-     */
     public function getRate(): float
     {
         return $this->rate;
     }
 
-    /**
-     * @return int
-     */
     public function getUpdateAt(): int
     {
         return $this->updateAt;

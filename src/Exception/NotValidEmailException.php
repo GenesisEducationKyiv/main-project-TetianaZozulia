@@ -1,8 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Exception;
 
-class NotValidEmail extends \InvalidArgumentException
+class NotValidEmailException extends \InvalidArgumentException
 {
     public function __construct()
     {

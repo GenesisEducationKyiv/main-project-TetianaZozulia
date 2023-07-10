@@ -6,6 +6,10 @@
 /public/bundles/
 /var/
 /vendor/
+
+##local file storage
+/data/
+
 ###< symfony/framework-bundle ###
 
 # Created by https://www.toptal.com/developers/gitignore/api/phpstorm,symfony

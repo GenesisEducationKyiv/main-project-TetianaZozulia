@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Model\Mail;
 
@@ -8,6 +10,10 @@ abstract class AbstractMail implements MailInterface
 {
     private Email $to;
     private string $txt;
+
+    abstract public function getFrom(): ?Email;
+    abstract public function getSubject(): string;
+    abstract public function getHtml(): string;
 
     public function setTo(Email $to): void
     {
@@ -19,20 +25,13 @@ abstract class AbstractMail implements MailInterface
         $this->txt = $txt;
     }
 
-    abstract public function getFrom(): ?Email;
-
-
     public function getTo(): Email
     {
         return $this->to;
     }
 
-    abstract public function getSubject(): string;
-
     public function getTxt(): string
     {
         return $this->txt;
     }
-
-    abstract public function getHtml(): string;
 }

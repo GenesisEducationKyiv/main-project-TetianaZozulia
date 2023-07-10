@@ -1,8 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Map;
 
-use App\Model\Rate as RateModel;
+use App\Model\Rate;
 use App\Model\RateInterface;
 use App\Type\CurrencyName;
 
@@ -22,9 +24,9 @@ class ApiRate implements MapperInterface
         ];
     }
 
-    public function fromArray(array $ar)
+    public function fromArray(array $ar): RateInterface
     {
-        return new RateModel(
+        return new Rate(
             new CurrencyName($ar['target']),
             new CurrencyName($ar['currencyTo']),
             $ar['rates'][$ar['currencyTo']],
