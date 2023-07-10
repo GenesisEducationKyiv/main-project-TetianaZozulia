@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
+use App\Event\ApiIncorrectResponse;
 use App\Event\ApiReturnResponse;
 use App\Map\Rate;
 use App\Serializer\JsonSerializer;
@@ -24,6 +25,9 @@ class ApiResponseSubscriber implements EventSubscriberInterface
             ApiReturnResponse::NAME => [
                 ['logResponse', 0],
             ],
+            ApiIncorrectResponse::NAME => [
+                ['logIncorrectResponse', 0],
+            ]
         ];
     }
 
@@ -32,6 +36,14 @@ class ApiResponseSubscriber implements EventSubscriberInterface
         $this->logger->info(
             sprintf('%s api client return result:', $event->getApiName())
             . $this->serializer->serialize($this->rateMapper->toArray($event->getRate()))
+        );
+    }
+
+    public function logIncorrectResponse(ApiIncorrectResponse $event): void
+    {
+        $this->logger->info(
+            sprintf('Api mapper failed. %s api client return result:', $event->getApiName())
+            . $event->getExceptionMessage()
         );
     }
 }

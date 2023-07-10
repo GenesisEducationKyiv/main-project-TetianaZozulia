@@ -4,17 +4,23 @@ declare(strict_types=1);
 
 namespace App\Service\Currency\Handler;
 
+use App\Enum\ApiName;
+use App\Event\ApiIncorrectResponse;
+use App\Event\ApiReturnResponse;
 use App\Exception\CurrencyApiFailedException;
 use App\Model\RateInterface;
 use App\Model\ResourceModel\CurrencyResourceInterface;
 use App\Service\Currency\Repository\CurrencyClientInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-abstract class AbstractCurrencyHandler
+class AbstractCurrencyHandler
 {
+    protected const API_NAME = ApiName::CoinLayer;
     protected ?AbstractCurrencyHandler $next = null;
 
     public function __construct(
         protected CurrencyClientInterface $client,
+        private EventDispatcherInterface $eventDispatcher
     ) {
     }
 
@@ -34,8 +40,26 @@ abstract class AbstractCurrencyHandler
     public function getCurrencyRate(CurrencyResourceInterface $currencyResource): RateInterface
     {
         try {
-            return $this->client->getRate($currencyResource);
+            $rate = $this->client->getRate($currencyResource);
+
+            $event = new ApiReturnResponse($rate, static::API_NAME->value);
+            $this->eventDispatcher->dispatch(
+                $event,
+                $event::NAME
+
+            );
+
+            return $rate;
         } catch (CurrencyApiFailedException $exception) {
+            if (strpos($exception->getMessage(), 'Warning: Undefined array key')) {
+                $event = new ApiIncorrectResponse($exception->getMessage(), static::API_NAME->value);
+                $this->eventDispatcher->dispatch(
+                    $event,
+                    $event::NAME
+
+                );
+            }
+
             return $this->processNext($currencyResource);
         }
     }
