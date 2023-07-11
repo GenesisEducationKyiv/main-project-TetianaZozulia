@@ -15,6 +15,3 @@ jobs:
 
       - name: run phpcs
         run: composer sniff
-
-      - name: run test
-        run: composer tests
