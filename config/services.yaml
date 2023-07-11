@@ -3,11 +3,10 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-parameters:
-    subscriber.storage.path: '/subscribers'
-
-    currency.default.from: 'BTC'
-    currency.default.to: 'USD'
+imports:
+    - { resource: services_rate.yaml }
+    - { resource: services_subscription.yaml }
+    - { resource: services_mailer.yaml }
 
 services:
     # default configuration for services in *this* file
@@ -27,87 +26,12 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
-    # alias to allow this type to be autowired
-    mail.factory: '@App\Service\Mailer\MailFactory'
-    App\Service\Currency\Handler\ApilayerCurrencyHandler: ~
-    currency.handler.apilayer: '@App\Service\Currency\Handler\ApilayerCurrencyHandler'
-    currency.handler.coinlayer: '@App\Service\Currency\Handler\CoinlayerCurrencyHandler'
-    currency.handler.coingeco: '@App\Service\Currency\Handler\CoinGecoCurrencyHandler'
-    currency.client.coinlayer: '@App\Service\Currency\Repository\CoinlayerCurrencyClient'
-    currency.client.apilayer: '@App\Service\Currency\Repository\ApiLayerCurrencyClient'
-    currency.client.coingeco: '@App\Service\Currency\Repository\CoinGecoCurrencyClient'
-    App\Service\Currency\Repository\CurrencyClientInterface: '@App\Service\Currency\Repository\ApiLayerCurrencyClient'
+            - '../src/Module/{Rate,Subscription,Mailer}/'
 
     #services
     App\EventListener\ExceptionListener:
         tags: [ kernel.event_listener ]
 
-    App\Service\Storage\FileService:
+    App\Storage\FileStorage\FileStorage:
         arguments:
             $path: '%kernel.project_dir%/data'
-
-    App\Service\BusinessCase\SendEmailsByTopicCase:
-        arguments:
-            $mailFactory: '@mail.factory'
-
-    App\Service\BusinessCase\GetRateBusinessCase:
-        arguments:
-            $currencyClient: '@currency.handler.coinlayer'
-            $defaultCurrencyFrom: '%currency.default.from%'
-            $defaultCurrencyTo: '%currency.default.to%'
-
-    App\Service\BusinessCase\UpdateRateBusinessCase:
-        arguments:
-            $currencyClient: '@currency.handler.coinlayer'
-            $defaultCurrencyFrom: '%currency.default.from%'
-            $defaultCurrencyTo: '%currency.default.to%'
-
-    App\Service\Lock\LockService:
-        arguments:
-            $lockStoragePath: '/lock/'
-
-    #currency service
-    App\Service\Currency\Repository\CoinlayerCurrencyClient:
-        arguments:
-            $apiHost: 'http://api.coinlayer.com'
-            $apiKey: '50f2719c8e2a0854f650e25d5e379b94'
-
-    App\Service\Currency\Repository\ApiLayerCurrencyClient:
-        arguments:
-            $apiHost: 'https://api.apilayer.com'
-            $apiKey: 'GpnVjT3ycQVoWs03jJ6H3J0WllSoaw7k'
-
-    App\Service\Currency\Repository\CoinGecoCurrencyClient:
-        arguments:
-            $apiHost: 'https://api.coingecko.com'
-
-    App\Service\Currency\Handler\CoinlayerCurrencyHandler:
-        arguments:
-            $client: '@currency.client.coinlayer'
-        calls:
-            - setNext: [ '@currency.handler.coingeco' ]
-
-    App\Service\Currency\Handler\CoinGecoCurrencyHandler:
-        arguments:
-            $client: '@currency.client.coingeco'
-        calls:
-            - setNext: [ '@currency.handler.apilayer' ]
-
-    App\Service\Currency\Handler\ApiLayerCurrencyHandler:
-        arguments:
-            $client: '@currency.client.apilayer'
-
-    #repositories
-    App\Repository\RateRepository:
-        arguments:
-            $defaultCurrencyFrom: '%currency.default.from%'
-            $defaultCurrencyTo: '%currency.default.to%'
-            $fileName: '/rate_%%s_%%s.json'
-
-    App\Repository\SubscribersRepository:
-        arguments:
-            $filePath: '%subscriber.storage.path%'

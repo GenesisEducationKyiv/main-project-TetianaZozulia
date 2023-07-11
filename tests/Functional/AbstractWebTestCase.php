@@ -21,7 +21,7 @@ class AbstractWebTestCase extends WebTestCase
     public function httpGet(string $url, array $queryParams = []): string
     {
         self::$client->request('GET', $url, $queryParams, [], self::DEFAULT_HEADERS);
-        return static::$client->getResponse()->getContent();
+        return self::$client->getResponse()->getContent();
     }
 
     public function httpPatch(string $url, array $request): string

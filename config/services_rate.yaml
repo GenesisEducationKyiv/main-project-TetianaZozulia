@@ -1,0 +1,80 @@
+parameters:
+    currency.default.from: 'BTC'
+    currency.default.to: 'USD'
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Module/{Subscription,Mailer}/'
+
+    # alias to allow this type to be autowired
+    currency.default.resource: '@App\Module\Rate\Model\ResourceModel\CurrencyDefaultResource'
+    App\Module\Rate\Service\Currency\Handler\ApilayerCurrencyHandler: ~
+    currency.handler.apilayer: '@App\Module\Rate\Service\Currency\Handler\ApilayerCurrencyHandler'
+    currency.handler.coinlayer: '@App\Module\Rate\Service\Currency\Handler\CoinlayerCurrencyHandler'
+    currency.handler.coingeco: '@App\Module\Rate\Service\Currency\Handler\CoinGecoCurrencyHandler'
+    currency.client.coinlayer: '@App\Module\Rate\Service\Currency\Client\CoinlayerCurrencyClient'
+    currency.client.apilayer: '@App\Module\Rate\Service\Currency\Client\ApiLayerCurrencyClient'
+    currency.client.coingeco: '@App\Module\Rate\Service\Currency\Client\CoinGecoCurrencyClient'
+    App\Module\Rate\Service\Currency\Client\CurrencyClientInterface: '@App\Module\Rate\Service\Currency\Client\ApiLayerCurrencyClient'
+
+    #model
+    App\Module\Rate\Model\ResourceModel\CurrencyDefaultResource:
+        arguments:
+            $from: '%currency.default.from%'
+            $to: '%currency.default.to%'
+
+    #services
+    App\Module\Rate\Service\BusinessCase\GetRateBusinessCase:
+        arguments:
+            $currencyClient: '@currency.handler.coinlayer'
+            $defaultCurrency: '@currency.default.resource'
+
+    App\Module\Rate\Service\BusinessCase\UpdateRateBusinessCase:
+        arguments:
+            $currencyClient: '@currency.handler.coinlayer'
+            $defaultCurrency: '@currency.default.resource'
+
+    App\Module\Rate\Service\Currency\Client\CoinlayerCurrencyClient:
+        arguments:
+            $apiHost: 'http://api.coinlayer.com'
+            $apiKey: '50f2719c8e2a0854f650e25d5e379b94'
+
+    App\Module\Rate\Service\Currency\Client\ApiLayerCurrencyClient:
+        arguments:
+            $apiHost: 'https://api.apilayer.com'
+            $apiKey: 'GpnVjT3ycQVoWs03jJ6H3J0WllSoaw7k'
+
+    App\Module\Rate\Service\Currency\Client\CoinGecoCurrencyClient:
+        arguments:
+            $apiHost: 'https://api.coingecko.com'
+
+    App\Module\Rate\Service\Currency\Handler\CoinlayerCurrencyHandler:
+        arguments:
+            $client: '@currency.client.coinlayer'
+        calls:
+            - setNext: [ '@currency.handler.coingeco' ]
+
+    App\Module\Rate\Service\Currency\Handler\CoinGecoCurrencyHandler:
+        arguments:
+            $client: '@currency.client.coingeco'
+        calls:
+            - setNext: [ '@currency.handler.apilayer' ]
+
+    App\Module\Rate\Service\Currency\Handler\ApiLayerCurrencyHandler:
+        arguments:
+            $client: '@currency.client.apilayer'
+
+    #repositories
+    App\Module\Rate\Repository\RateRepository:
+        arguments:
+            $defaultCurrency: '@currency.default.resource'
+            $fileName: '/rate_%%s_%%s.json'
