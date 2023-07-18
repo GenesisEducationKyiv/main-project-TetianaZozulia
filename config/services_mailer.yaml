@@ -13,6 +13,8 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Module/{Subscription,Rate}/'
+            - '../src/Logger/'
+            - '../src/Broker/'
 
     # alias to allow this type to be autowired
     mail.factory: '@App\Module\Mailer\Service\Mailer\MailFactory'

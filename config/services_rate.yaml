@@ -14,6 +14,8 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Module/{Subscription,Mailer}/'
+            - '../src/Logger/'
+            - '../src/Broker/'
 
     # alias to allow this type to be autowired
     currency.default.resource: '@App\Module\Rate\Model\ResourceModel\CurrencyDefaultResource'
@@ -78,3 +80,7 @@ services:
         arguments:
             $defaultCurrency: '@currency.default.resource'
             $fileName: '/rate_%%s_%%s.json'
+
+    App\Module\Rate\EventSubscriber\ApiResponseSubscriber:
+        arguments:
+            $logger: '@custom.logger'

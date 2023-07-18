@@ -1,0 +1,61 @@
+parameters:
+    log.rabbitexchange.name: 'direct-log'
+    log.rabbitexchange.type: 'direct'
+
+    rabbitMq.host: 'rabbitmq'
+    rabbitMq.port: 5672
+    rabbitMq.user: 'guest'
+    rabbitMq.pass: 'guest'
+    rabbitMq.vhost: '/'
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Module/{Rate,Subscription,Mailer}/'
+
+    rabbitMq.connection: '@PhpAmqpLib\Connection\AMQPStreamConnection'
+    rabbit.client: '@App\Broker\Rabbit\RabbitClient'
+    kafka.client: '@App\Broker\Kafka\KafkaClient'
+    log.rabbit.publisher: '@App\Broker\Rabbit\LogRabbitPublisher'
+    log.rabbit.receiver: '@App\Broker\Rabbit\LogRabbitReceiver'
+    log.kafka.publisher: '@App\Broker\Kafka\LogKafkaPublisher'
+    custom.logger: '@App\Logger\CustomErrorLogger'
+
+    PhpAmqpLib\Connection\AMQPStreamConnection:
+        arguments:
+            $host: '%rabbitMq.host%'
+            $port: '%rabbitMq.port%'
+            $user: '%rabbitMq.user%'
+            $password: '%rabbitMq.pass%'
+
+    App\Broker\Rabbit\RabbitClient:
+        arguments:
+            $connection: '@rabbitMq.connection'
+
+    App\Broker\Kafka\LogKafkaPublisher:
+        arguments:
+            $kafkaClient: '@kafka.client'
+
+    App\Broker\Rabbit\LogRabbitPublisher:
+        arguments:
+            $rabbitClient: '@rabbit.client'
+            $exchangeName: '%log.rabbitexchange.name%'
+            $exchangeType: '%log.rabbitexchange.type%'
+
+    App\Broker\Rabbit\LogRabbitReceiver:
+        arguments:
+            $client: '@rabbit.client'
+            $exchangeName: '%log.rabbitexchange.name%'
+            $exchangeType: '%log.rabbitexchange.type%'
+
+    App\Logger\CustomErrorLogger:
+        arguments:
+            $logPublisher: '@log.rabbit.publisher'
