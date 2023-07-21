@@ -15,7 +15,7 @@ jobs:
         uses: php-actions/composer@master
         with:
           php_version: '8.1'
-          php_extensions: sockets librdkafka-dev
+          php_extensions: sockets rdkafka
 
       - name: run phpcs
         run: composer sniff
