@@ -85,3 +85,8 @@ $ docker build -t currency_api_project .
   php bin/console app:log-receive info,error
   php bin/console app:log-receive error
 ```
+
+* run kafka consumer (from docker)
+```
+  php bin/console app:log-kafka-receive error
+```

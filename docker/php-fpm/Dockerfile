@@ -1,14 +1,20 @@
 # Dockerfile
 FROM php:8.1-fpm
 
-RUN apt-get update && apt-get install -y zlib1g-dev g++ git libicu-dev zip libzip-dev zip \
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g-dev g++ git libicu-dev libssl-dev zip libzip-dev zip make\
     && pecl install apcu \
     && docker-php-ext-enable apcu \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
-    && docker-php-ext-install sockets
+    && docker-php-ext-install sockets \
+    && git clone --depth 1 --branch v2.2.0 https://github.com/edenhill/librdkafka.git \
+    && cd librdkafka \
+    && ./configure && make && make install \
+    && cd ../ && rm -rf librdkafka \
+    && pecl install rdkafka \
+    && echo "extension=rdkafka.so" > /usr/local/etc/php/conf.d/rdkafka.ini
 
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
 RUN apt-get update -y && apt-get install -y libmcrypt-dev symfony-cli

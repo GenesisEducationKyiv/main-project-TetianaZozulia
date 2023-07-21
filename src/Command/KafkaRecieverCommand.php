@@ -11,8 +11,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'app:log-receive')]
-class RabbitRecieverCommand extends Command
+#[AsCommand(name: 'app:log-kafka-receive')]
+class KafkaRecieverCommand extends Command
 {
     public function __construct(
         private LogReceiverInterface $receiver,

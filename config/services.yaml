@@ -43,4 +43,8 @@ services:
 
     App\Command\RabbitRecieverCommand:
         arguments:
-           $rabbitReceiver: '@log.rabbit.receiver'
+           $receiver: '@log.rabbit.receiver'
+
+    App\Command\KafkaRecieverCommand:
+        arguments:
+           $receiver: '@log.kafka.receiver'

@@ -8,6 +8,21 @@ parameters:
     rabbitMq.pass: 'guest'
     rabbitMq.vhost: '/'
 
+    kafka.publisher.config:
+        - metadata.broker.list: 'kafka:9092'
+
+    kafka.consumer.config:
+        - group.id: 'errorGroup'
+        - enable.partition.eof: 'true'
+
+    kafka.consumer.topicConfig:
+        - auto.commit.interval.ms: '100'
+        - offset.store.method: 'broker' #Set the offset store method to 'file'
+        - auto.offset.reset: 'earliest' #Set where to start consuming messages when there is no initial offset in
+                                        #offset store or the desired offset is out of range.
+                                        #'earliest': start from the beginning
+
+
 services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -27,6 +42,7 @@ services:
     log.rabbit.publisher: '@App\Broker\Rabbit\LogRabbitPublisher'
     log.rabbit.receiver: '@App\Broker\Rabbit\LogRabbitReceiver'
     log.kafka.publisher: '@App\Broker\Kafka\LogKafkaPublisher'
+    log.kafka.receiver: '@App\Broker\Kafka\LogKafkaReceiver'
     custom.logger: '@App\Logger\CustomErrorLogger'
 
     PhpAmqpLib\Connection\AMQPStreamConnection:
@@ -43,6 +59,7 @@ services:
     App\Broker\Kafka\LogKafkaPublisher:
         arguments:
             $kafkaClient: '@kafka.client'
+            $kafkaConfig: '%kafka.publisher.config%'
 
     App\Broker\Rabbit\LogRabbitPublisher:
         arguments:
@@ -56,6 +73,14 @@ services:
             $exchangeName: '%log.rabbitexchange.name%'
             $exchangeType: '%log.rabbitexchange.type%'
 
+    App\Broker\Kafka\LogKafkaReceiver:
+        arguments:
+            $client: '@kafka.client'
+            $consumerConfig: '%kafka.consumer.config%'
+            $topicConfig: '%kafka.consumer.topicConfig%'
+            $brokerName: 'kafka'
+
     App\Logger\CustomErrorLogger:
         arguments:
             $logPublisher: '@log.rabbit.publisher'
+            $logPublisher2: '@log.kafka.publisher'
