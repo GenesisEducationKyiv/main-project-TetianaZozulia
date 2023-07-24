@@ -1,0 +1,25 @@
+parameters:
+    subscriber.storage.path: '/subscribers'
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Module/{Mailer,Rate}/'
+
+    #repositories
+    App\Module\Subscription\Repository\SubscribersRepository:
+        arguments:
+            $filePath: '%subscriber.storage.path%'
+
+    #services
+    App\Module\Subscription\Service\Lock\LockService:
+        arguments:
+            $lockStoragePath: '/lock/'

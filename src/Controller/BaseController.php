@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Map\MapperInterface;
 use App\Model\ResourceModel\ResourceInterface;
+use App\Serializer\JsonSerializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
@@ -16,7 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BaseController extends AbstractController
 {
     public function __construct(
-        protected SerializerInterface $serializer
+        protected SerializerInterface $serializer,
+        protected JsonSerializer $jsonSerializer
     ) {
     }
 
@@ -35,8 +37,12 @@ class BaseController extends AbstractController
 
     protected function parseQuery(Request $request, MapperInterface $mapper): ?ResourceInterface
     {
+        $params = array_merge(
+            $request->query->getIterator()->getArrayCopy(),
+            $this->jsonSerializer->deserialize($request->getContent()) ?? []
+        );
         try {
-            $resource = $mapper->fromArray($request->query->getIterator()->getArrayCopy());
+            $resource = $mapper->fromArray($params);
         } catch (\Exception $exception) {
             if (strpos($exception->getMessage(), 'Undefined array key')) {
                 return null;
