@@ -1,0 +1,28 @@
+parameters:
+    subscriber.storage.processing.path: '/subscribers/processing/'
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Module/{Subscription,Rate}/'
+
+    # alias to allow this type to be autowired
+    mail.factory: '@App\Module\Mailer\Service\Mailer\MailFactory'
+
+    #services
+    App\Module\Mailer\Service\BusinessCase\SendEmailsByTopicCase:
+        arguments:
+            $mailFactory: '@mail.factory'
+
+    App\Module\Mailer\Service\Processing\Processing:
+        arguments:
+            $path: '%subscriber.storage.processing.path%'
+

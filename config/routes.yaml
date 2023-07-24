@@ -1,0 +1,17 @@
+rate_controllers:
+  resource:
+    path: ../src/Module/Rate/Controller
+    namespace: App\Module\Rate\Controller\
+  type: attribute
+
+subscription_controllers:
+  resource:
+    path: ../src/Module/Subscription/Controller
+    namespace: App\Module\Subscription\Controller\
+  type: attribute
+
+mailer_controllers:
+  resource:
+    path: ../src/Module/Mailer/Controller
+    namespace: App\Module\Mailer\Controller\
+  type: attribute

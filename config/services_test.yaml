@@ -1,0 +1,6 @@
+services:
+
+  App\Storage\FileStorage\FileStorage:
+    arguments:
+      $path: '%kernel.project_dir%/tests/data'
+
