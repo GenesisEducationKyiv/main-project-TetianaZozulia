@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Enum;
+namespace App\Broker\Rabbit\Enum;
 
 enum RabbitExchangeType : string {
     case Direct = 'direct';

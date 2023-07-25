@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Logger;
+namespace App\Broker;
 
 use App\Enum\ErrorType;
 
-interface LogPublisherInterface
+interface PublisherInterface
 {
     public function publish(string $message, ErrorType $errorType): void;
 }

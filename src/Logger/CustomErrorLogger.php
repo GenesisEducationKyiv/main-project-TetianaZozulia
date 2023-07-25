@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Logger;
 
+use App\Broker\PublisherInterface;
 use App\Enum\ErrorType;
 use App\Serializer\JsonSerializer;
 use Psr\Log\LoggerInterface;
@@ -11,64 +12,81 @@ use Psr\Log\LoggerInterface;
 class CustomErrorLogger implements LoggerInterface
 {
     public function __construct(
-        private LogPublisherInterface $logPublisher,
-        private LogPublisherInterface $logPublisher2,
+        private array $logPublishers,
         private JsonSerializer $serializer
     ) {
     }
 
     public function emergency(\Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::Error);
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::Error);
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::Error);
+        }
     }
 
     public function alert(\Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::Error);
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::Error);
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::Error);
+        }
     }
 
     public function critical(\Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::Error);
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::Error);
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::Error);
+        }
     }
 
     public function error(\Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::Error);
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::Error);
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::Error);
+        }
     }
 
     public function warning(\Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::Error);
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::Error);
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::Error);
+        }
     }
 
     public function notice(\Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::Info);
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::Info);
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::Info);
+        }
     }
 
     public function info(\Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::Info);
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::Info);
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::Info);
+        }
     }
 
     public function debug(\Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::Debug);
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::Debug);
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::Debug);
+        }
     }
 
     public function log($level, \Stringable|string $message, array $context = []): void
     {
-        $this->logPublisher->publish($message . $this->serializeContext($context),ErrorType::from($level));
-        $this->logPublisher2->publish($message . $this->serializeContext($context),ErrorType::from($level));
+        /** @var PublisherInterface $publisher */
+        foreach ($this->logPublishers as $publisher) {
+            $publisher->publish($message . $this->serializeContext($context), ErrorType::from($level));
+        }
     }
 
     private function serializeContext(array $context): string

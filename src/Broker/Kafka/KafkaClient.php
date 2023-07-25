@@ -9,6 +9,7 @@ use \RdKafka\Conf;
 use \RdKafka\Producer;
 use \RdKafka\TopicConf;
 use \RdKafka\Message;
+use \RdKafka\Consumer;
 
 class KafkaClient
 {
@@ -55,7 +56,7 @@ class KafkaClient
             throw new \InvalidArgumentException(sprintf('Undefined kafka topic name "%s"', $topicName));
         }
 
-        $consumer = new \RdKafka\Consumer($conf);
+        $consumer = new Consumer($conf);
         $consumer->addBrokers($brokerName);
 
         $topic = $consumer->newTopic($topicName, $topicConf);

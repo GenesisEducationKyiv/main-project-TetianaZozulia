@@ -29,7 +29,7 @@ services:
 
   zookeeper:
     container_name: zookeeper-container
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:6.0.14
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -40,7 +40,7 @@ services:
 
   kafka:
     container_name: kafka
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:6.0.14
     depends_on:
       - zookeeper
     ports:
@@ -49,8 +49,6 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - nginx-php81
@@ -61,11 +59,6 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-#    healthcheck:
-#      test: [ "CMD", "curl", "-f", "http://localhost:15672" ]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 5
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq

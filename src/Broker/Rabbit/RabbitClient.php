@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Broker\Rabbit;
 
 use App\Enum\ErrorType;
-use App\Enum\RabbitExchangeType;
+use App\Broker\Rabbit\Enum\RabbitExchangeType;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Connection\AbstractConnection;

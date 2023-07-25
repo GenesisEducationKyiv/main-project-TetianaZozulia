@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Logger;
+namespace App\Broker;
 
-interface LogReceiverInterface
+interface ReceiverInterface
 {
     public function receive(array $routeKeys): void;
 }

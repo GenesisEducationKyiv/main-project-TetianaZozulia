@@ -39,10 +39,8 @@ services:
     rabbitMq.connection: '@PhpAmqpLib\Connection\AMQPStreamConnection'
     rabbit.client: '@App\Broker\Rabbit\RabbitClient'
     kafka.client: '@App\Broker\Kafka\KafkaClient'
-    log.rabbit.publisher: '@App\Broker\Rabbit\LogRabbitPublisher'
-    log.rabbit.receiver: '@App\Broker\Rabbit\LogRabbitReceiver'
-    log.kafka.publisher: '@App\Broker\Kafka\LogKafkaPublisher'
-    log.kafka.receiver: '@App\Broker\Kafka\LogKafkaReceiver'
+    rabbit.broker: '@App\Broker\Rabbit\RabbitBroker'
+    kafka.broker: '@App\Broker\Kafka\KafkaBroker'
     custom.logger: '@App\Logger\CustomErrorLogger'
 
     PhpAmqpLib\Connection\AMQPStreamConnection:
@@ -56,31 +54,42 @@ services:
         arguments:
             $connection: '@rabbitMq.connection'
 
-    App\Broker\Kafka\LogKafkaPublisher:
+    App\Broker\Kafka\KafkaBroker:
         arguments:
-            $kafkaClient: '@kafka.client'
-            $kafkaConfig: '%kafka.publisher.config%'
+            $client: '@kafka.client'
+            $publishConfig: '%kafka.publisher.config%'
+            $consumerConfig: '%kafka.consumer.config%'
+            $topicConfig: '%kafka.consumer.topicConfig%'
+            $brokerName: 'kafka'
 
-    App\Broker\Rabbit\LogRabbitPublisher:
-        arguments:
-            $rabbitClient: '@rabbit.client'
-            $exchangeName: '%log.rabbitexchange.name%'
-            $exchangeType: '%log.rabbitexchange.type%'
-
-    App\Broker\Rabbit\LogRabbitReceiver:
+    App\Broker\Rabbit\RabbitBroker:
         arguments:
             $client: '@rabbit.client'
             $exchangeName: '%log.rabbitexchange.name%'
             $exchangeType: '%log.rabbitexchange.type%'
 
-    App\Broker\Kafka\LogKafkaReceiver:
+    log.rabbit.publisher:
+        class: App\Logger\LogPublisher
         arguments:
-            $client: '@kafka.client'
-            $consumerConfig: '%kafka.consumer.config%'
-            $topicConfig: '%kafka.consumer.topicConfig%'
-            $brokerName: 'kafka'
+            $publisher: '@rabbit.broker'
+
+    log.kafka.publisher:
+        class: App\Logger\LogPublisher
+        arguments:
+            $publisher: '@kafka.broker'
+
+    log.rabbit.receiver:
+        class: App\Logger\LogReceiver
+        arguments:
+            $receiver: '@rabbit.broker'
+
+    log.kafka.receiver:
+        class: App\Logger\LogReceiver
+        arguments:
+            $receiver: '@kafka.broker'
 
     App\Logger\CustomErrorLogger:
         arguments:
-            $logPublisher: '@log.rabbit.publisher'
-            $logPublisher2: '@log.kafka.publisher'
+            $logPublishers:
+                - '@log.rabbit.publisher'
+                - '@log.kafka.publisher'

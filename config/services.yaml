@@ -37,14 +37,16 @@ services:
         arguments:
             $logger: '@custom.logger'
 
+    App\EventListener\ConsoleExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: console.error, method: onConsoleError }
+            - { name: kernel.event_listener, event: console.exception, method: onConsoleError }
+
     App\Storage\FileStorage\FileStorage:
         arguments:
             $path: '%kernel.project_dir%/data'
 
-    App\Command\RabbitRecieverCommand:
-        arguments:
-           $receiver: '@log.rabbit.receiver'
-
-    App\Command\KafkaRecieverCommand:
-        arguments:
-           $receiver: '@log.kafka.receiver'
+    App\Command\LogRecieverCommand:
+        calls:
+            - [attachBroker, ['rabbit', '@log.rabbit.receiver']]
+            - [attachBroker, ['kafka', '@log.kafka.receiver']]

@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="553f04fe-02b1-49fd-bb3c-f2e4fe7a47ce" name="Changes" comment="Fix serializers and foreach">
-      <change afterPath="$PROJECT_DIR$/.idea/main-project-TetianaZozulia-3.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Broker/Kafka/LogKafkaReceiver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Command/KafkaRecieverCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="553f04fe-02b1-49fd-bb3c-f2e4fe7a47ce" name="Changes" comment="hw7 kafka event bus">
+      <change afterPath="$PROJECT_DIR$/src/Broker/Kafka/KafkaBroker.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Broker/Rabbit/RabbitBroker.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Command/LogRecieverCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EventListener/ConsoleExceptionListener.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Logger/LogPublisher.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Logger/LogReceiver.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/services_customlog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services_customlog.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/php-fpm/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/php-fpm/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Broker/Kafka/KafkaClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Broker/Kafka/KafkaClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Broker/Kafka/LogKafkaPublisher.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Broker/Kafka/LogKafkaPublisher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command/RabbitRecieverCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/RabbitRecieverCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Broker/Kafka/LogKafkaPublisher.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Broker/Kafka/LogKafkaReceiver.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Broker/Rabbit/LogRabbitPublisher.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Broker/Rabbit/LogRabbitReceiver.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Broker/Rabbit/RabbitClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Broker/Rabbit/RabbitClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command/KafkaRecieverCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command/RabbitRecieverCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enum/RabbitExchangeType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Broker/Rabbit/Enum/RabbitExchangeType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Logger/CustomErrorLogger.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logger/CustomErrorLogger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Logger/LogPublisherInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Broker/PublisherInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Logger/LogReceiverInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Broker/ReceiverInterface.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,18 +163,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Broker/Kafka" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Broker/Rabbit/Enum" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Broker/Rabbit/Enum" />
+      <recent name="$PROJECT_DIR$/src/EventListener" />
+      <recent name="$PROJECT_DIR$/src/Broker" />
       <recent name="$PROJECT_DIR$/src/Broker/Kafka" />
       <recent name="$PROJECT_DIR$/src/Command" />
-      <recent name="$PROJECT_DIR$/src/Logger" />
-      <recent name="$PROJECT_DIR$/config" />
-      <recent name="$PROJECT_DIR$/src/Enum" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docker" />
@@ -285,7 +291,14 @@
       <updated>1689693306969</updated>
       <workItem from="1689693310343" duration="74000" />
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="hw7 kafka event bus">
+      <created>1689925676274</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1689925676274</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +326,8 @@
     <MESSAGE value="hw6 module monolith architecture" />
     <MESSAGE value="docker-compose add" />
     <MESSAGE value="hw7 rabbit event bus" />
-    <option name="LAST_COMMIT_MESSAGE" value="hw7 rabbit event bus" />
+    <MESSAGE value="hw7 kafka event bus" />
+    <option name="LAST_COMMIT_MESSAGE" value="hw7 kafka event bus" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
