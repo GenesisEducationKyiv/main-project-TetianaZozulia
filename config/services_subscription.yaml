@@ -13,6 +13,8 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Module/{Mailer,Rate}/'
+            - '../src/Logger/'
+            - '../src/Broker/'
 
     #repositories
     App\Module\Subscription\Repository\SubscribersRepository:

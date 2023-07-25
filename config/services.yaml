@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 imports:
+    - { resource: services_customlog.yaml }
     - { resource: services_rate.yaml }
     - { resource: services_subscription.yaml }
     - { resource: services_mailer.yaml }
@@ -27,11 +28,25 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Module/{Rate,Subscription,Mailer}/'
+            - '../src/Logger/'
+            - '../src/Broker/'
 
     #services
     App\EventListener\ExceptionListener:
         tags: [ kernel.event_listener ]
+        arguments:
+            $logger: '@custom.logger'
+
+    App\EventListener\ConsoleExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: console.error, method: onConsoleError }
+            - { name: kernel.event_listener, event: console.exception, method: onConsoleError }
 
     App\Storage\FileStorage\FileStorage:
         arguments:
             $path: '%kernel.project_dir%/data'
+
+    App\Command\LogRecieverCommand:
+        calls:
+            - [attachBroker, ['rabbit', '@log.rabbit.receiver']]
+            - [attachBroker, ['kafka', '@log.kafka.receiver']]

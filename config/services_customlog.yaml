@@ -1,0 +1,95 @@
+parameters:
+    log.rabbitexchange.name: 'direct-log'
+    log.rabbitexchange.type: 'direct'
+
+    rabbitMq.host: 'rabbitmq'
+    rabbitMq.port: 5672
+    rabbitMq.user: 'guest'
+    rabbitMq.pass: 'guest'
+    rabbitMq.vhost: '/'
+
+    kafka.publisher.config:
+        - metadata.broker.list: 'kafka:9092'
+
+    kafka.consumer.config:
+        - group.id: 'errorGroup'
+        - enable.partition.eof: 'true'
+
+    kafka.consumer.topicConfig:
+        - auto.commit.interval.ms: '100'
+        - offset.store.method: 'broker' #Set the offset store method to 'file'
+        - auto.offset.reset: 'earliest' #Set where to start consuming messages when there is no initial offset in
+                                        #offset store or the desired offset is out of range.
+                                        #'earliest': start from the beginning
+
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Module/{Rate,Subscription,Mailer}/'
+
+    rabbitMq.connection: '@PhpAmqpLib\Connection\AMQPStreamConnection'
+    rabbit.client: '@App\Broker\Rabbit\RabbitClient'
+    kafka.client: '@App\Broker\Kafka\KafkaClient'
+    rabbit.broker: '@App\Broker\Rabbit\RabbitBroker'
+    kafka.broker: '@App\Broker\Kafka\KafkaBroker'
+    custom.logger: '@App\Logger\CustomErrorLogger'
+
+    PhpAmqpLib\Connection\AMQPStreamConnection:
+        arguments:
+            $host: '%rabbitMq.host%'
+            $port: '%rabbitMq.port%'
+            $user: '%rabbitMq.user%'
+            $password: '%rabbitMq.pass%'
+
+    App\Broker\Rabbit\RabbitClient:
+        arguments:
+            $connection: '@rabbitMq.connection'
+
+    App\Broker\Kafka\KafkaBroker:
+        arguments:
+            $client: '@kafka.client'
+            $publishConfig: '%kafka.publisher.config%'
+            $consumerConfig: '%kafka.consumer.config%'
+            $topicConfig: '%kafka.consumer.topicConfig%'
+            $brokerName: 'kafka'
+
+    App\Broker\Rabbit\RabbitBroker:
+        arguments:
+            $client: '@rabbit.client'
+            $exchangeName: '%log.rabbitexchange.name%'
+            $exchangeType: '%log.rabbitexchange.type%'
+
+    log.rabbit.publisher:
+        class: App\Logger\LogPublisher
+        arguments:
+            $publisher: '@rabbit.broker'
+
+    log.kafka.publisher:
+        class: App\Logger\LogPublisher
+        arguments:
+            $publisher: '@kafka.broker'
+
+    log.rabbit.receiver:
+        class: App\Logger\LogReceiver
+        arguments:
+            $receiver: '@rabbit.broker'
+
+    log.kafka.receiver:
+        class: App\Logger\LogReceiver
+        arguments:
+            $receiver: '@kafka.broker'
+
+    App\Logger\CustomErrorLogger:
+        arguments:
+            $logPublishers:
+                - '@log.rabbit.publisher'
+                - '@log.kafka.publisher'

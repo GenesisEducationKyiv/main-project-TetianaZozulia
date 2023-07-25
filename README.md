@@ -46,13 +46,14 @@ $ docker build -t currency_api_project .
 
 * run
 ```bash
-  $ docker run -p 8000:8000 currency_api_project
+  $ docker-compose build
+  $ docker-compose up -d
 ```
 
 * exec
 ```bash
   $ docker ps
-  $ docker exec -ti 440b710fe5d7 /bin/bash  
+  $ docker exec -ti php81-container /bin/bash  
 ```
 
 
@@ -76,4 +77,16 @@ $ docker build -t currency_api_project .
 ```bash
   $ infection --threads=1 --noop
   $ infection --threads=5 --filter=src/Controller/MailerController --show-mutations
+```
+
+## Work with broker
+* run rabbit consumer (from docker)
+```
+  php bin/console app:log-receive info,error
+  php bin/console app:log-receive error
+```
+
+* run kafka consumer (from docker)
+```
+  php bin/console app:log-kafka-receive error
 ```

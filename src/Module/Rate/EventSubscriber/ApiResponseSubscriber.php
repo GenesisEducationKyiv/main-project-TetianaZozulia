@@ -41,7 +41,7 @@ class ApiResponseSubscriber implements EventSubscriberInterface
 
     public function logIncorrectResponse(ApiIncorrectResponse $event): void
     {
-        $this->logger->info(
+        $this->logger->error(
             sprintf('Api mapper failed. %s api client return result:', $event->getApiName())
             . $event->getExceptionMessage()
         );
