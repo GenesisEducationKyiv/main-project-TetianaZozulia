@@ -7,11 +7,15 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        
+      - name: Setup Kafka
+        uses: 280780363/kafka-action@v1.0
 
       - name: Install dependencies
         uses: php-actions/composer@master
         with:
           php_version: '8.1'
+          php_extensions: sockets rdkafka
 
       - name: run phpcs
         run: composer sniff
